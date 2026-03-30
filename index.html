@@ -1,374 +1,2234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>André Violante Ferreira</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>Bobby's Cosmopolitan Lifestyle</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #c9a84c;
+    --gold-dim: #8a6e2f;
+    --white: #f0ece4;
+    --white-dim: #7a7268;
+    --bg: #0a0a0a;
+    --card-bg: #111111;
+    --card-border: rgba(255,255,255,0.07);
+  }
 
-    :root {
-      --bg: #0a0a0a;
-      --surface: #111111;
-      --border: rgba(255,255,255,0.08);
-      --border-hover: rgba(255,255,255,0.18);
-      --text-primary: #f0ece4;
-      --text-secondary: rgba(240,236,228,0.45);
-      --text-muted: rgba(240,236,228,0.28);
-      --accent: #c8b99a;
-      --gap: clamp(2rem, 4vw, 4rem);
-    }
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    min-height: 100vh;
+    padding: 0 0 100px;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    html { scroll-behavior: smooth; }
+  /* ── Header ── */
+  header {
+    text-align: center;
+    padding: 72px 24px 56px;
+  }
 
-    body {
-      background: var(--bg);
-      color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: 13px;
-      line-height: 1.7;
-      letter-spacing: 0.01em;
-      -webkit-font-smoothing: antialiased;
-    }
+  header h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.4rem, 3.5vw, 2.6rem);
+    font-weight: 400;
+    font-style: normal;
+    color: var(--white);
+    letter-spacing: 0.1em;
+    line-height: 1.3;
+  }
 
-    .site-wrapper {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 clamp(1.5rem, 4vw, 4rem);
-    }
+  header .subtitle {
+    margin-top: 14px;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    font-family: 'Libre Baskerville', serif;
+  }
 
-    /* ── Fullscreen Hero ── */
-    .hero-full {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      background: #000;
-    }
+  /* ── Main ── */
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
 
-    .hero-full iframe {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100vw;
-      height: 56.25vw;
-      min-height: 100vh;
-      min-width: 177.78vh;
-      border: none;
-      pointer-events: none;
-    }
+  /* ── Year section ── */
+  .year-section {
+    margin-top: 64px;
+  }
 
-    .hero-credit {
-      position: absolute;
-      bottom: clamp(2rem, 4vw, 3.5rem);
-      left: clamp(1.5rem, 4vw, 4rem);
-      z-index: 10;
-    }
+  .year-heading {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+    color: var(--gold);
+    margin-bottom: 32px;
+    letter-spacing: 0.15em;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
 
-    .hero-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 500;
-      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
-      letter-spacing: -0.02em;
-      color: #f0ece4;
-      line-height: 1;
-    }
+  /* ── Grid ── */
+  .playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 32px;
+  }
 
-    /* ── Intro ── */
-    .intro {
-      padding: clamp(3rem, 6vw, 6rem) 0;
-    }
+  /* ── Card ── */
+  .playlist-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
 
-    .intro-role {
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 1.2rem;
-    }
+  /* ── Embedded player ── */
+  .player-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 */
+    background: #000;
+  }
 
-    .intro-bio {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 300;
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      line-height: 1.6;
-      color: var(--text-secondary);
-      max-width: 60ch;
-      letter-spacing: -0.01em;
-    }
+  .player-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
 
-    /* ── Project video frames ── */
-    .video-frame {
-      position: relative;
-      width: 100%;
-      background: var(--surface);
-      overflow: hidden;
-    }
+  /* ── Card label ── */
+  .card-label {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid var(--card-border);
+  }
 
-    .video-frame::before {
-      content: '';
-      display: block;
-      padding-top: 56.25%;
-    }
+  /* ── Tracklist ── */
+  .tracklist {
+    list-style: none;
+    padding: 10px 0 14px;
+    overflow-y: auto;
+    max-height: 260px;
+    flex: 1;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.1) transparent;
+  }
 
-    /* ── Works section ── */
-    .works {
-      padding: clamp(3rem, 6vw, 6rem) 0 3rem;
-    }
+  .tracklist::-webkit-scrollbar {
+    width: 3px;
+  }
+  .tracklist::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .tracklist::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.12);
+    border-radius: 2px;
+  }
 
-    .section-label {
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      padding-bottom: clamp(2rem, 4vw, 4rem);
-      border-bottom: 1px solid var(--border);
-      margin-bottom: clamp(2rem, 4vw, 4rem);
-    }
+  .tracklist li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 4px 16px;
+    transition: background 0.15s;
+  }
 
-    /* ── Project row ── */
-    .project {
-      display: grid;
-      grid-template-columns: 1fr 1.8fr;
-      grid-template-areas:
-        "title title"
-        "meta  video";
-      gap: clamp(2rem, 4vw, 5rem);
-      align-items: center;
-      padding: clamp(2.5rem, 4vw, 4rem) 0;
-    }
+  .tracklist li:hover {
+    background: rgba(255,255,255,0.03);
+  }
 
-    .project:last-child { border-bottom: none; }
+  .track-num {
+    font-size: 0.62rem;
+    color: var(--white-dim);
+    min-width: 18px;
+    text-align: right;
+    flex-shrink: 0;
+    font-family: 'Libre Baskerville', serif;
+    padding-top: 1px;
+  }
 
-    .project-title-block {
-      grid-area: title;
-    }
+  .track-title {
+    font-size: 0.72rem;
+    color: rgba(240,236,228,0.75);
+    line-height: 1.45;
+    font-family: 'Libre Baskerville', serif;
+  }
 
-    .project-meta {
-      grid-area: meta;
-    }
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    margin-top: 80px;
+    padding: 0 24px;
+  }
 
-    .project-video {
-      grid-area: video;
-    }
+  footer p {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.15);
+    font-family: 'Libre Baskerville', serif;
+  }
 
-    .project-client {
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.6rem;
-      opacity: 0.7;
-    }
-
-    .project-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 500;
-      font-size: clamp(1.1rem, 2vw, 1.6rem);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-      margin-bottom: 1.2rem;
-    }
-
-    .project-desc {
-      font-size: clamp(13px, 1vw, 15px);
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 1.6rem;
-    }
-
-    .project-role-label {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-    }
-
-    .project-role-detail {
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: clamp(12px, 0.95vw, 14px);
-      color: var(--text-secondary);
-      line-height: 1.75;
-    }
-
-    /* ── Footer ── */
-    footer {
-      padding: clamp(2rem, 4vw, 4rem) 0;
-      margin-top: 3rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .footer-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 300;
-      font-size: 13px;
-      color: var(--text-muted);
-      letter-spacing: -0.01em;
-    }
-
-    .footer-contact {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .footer-contact a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-contact a:hover { color: var(--text-primary); }
-
-    /* ── Grain overlay ── */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.025;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-size: 128px 128px;
-    }
-
-    /* ── Hide video player controls ── */
-    .video-frame iframe {
-      pointer-events: none;
-    }
-
-
-    @media (max-width: 680px) {
-      .hero-full {
-        height: 70vh;
-      }
-
-      .hero-full iframe {
-        width: 177.78vh;
-        height: 100vh;
-        min-height: unset;
-        min-width: unset;
-      }
-      header {
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-      .title-block { text-align: left; }
-
-      .project {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-          "title"
-          "video"
-          "meta";
-        gap: 1.5rem;
-      }
-
-      .project-desc { max-width: none; }
-      .project-role-detail { max-width: none; }
-
-      footer {
-        flex-direction: column;
-        gap: 0.75rem;
-        align-items: flex-start;
-      }
-    }
-  </style>
+  @media (max-width: 600px) {
+    main { padding: 0 16px; }
+    .playlist-grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- ── Fullscreen Hero ── -->
-  <section class="hero-full">
-    <iframe src="https://player.vimeo.com/video/1176348566?h=8301e6ba2a&autoplay=1&muted=1&controls=0&loop=1&background=1" allow="autoplay; fullscreen" allowfullscreen></iframe>
-    <div class="hero-credit">
-      <div class="hero-name">André Violante Ferreira</div>
+<header>
+  <h1>Bobby's Cosmopolitan Lifestyle</h1>
+  <p class="subtitle">A monthly music archive</p>
+</header>
+
+<main>
+
+  <!-- ════════════════ 2026 ════════════════ -->
+  <section class="year-section">
+    <h2 class="year-heading">2026</h2>
+    <div class="playlist-grid">
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ylXpq5mPZ4xUoQk8Jc7CpGV"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">March</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">KIBO - CHANCER</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Lab Rat XL - Lab Rat 3</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Run To The Sun - NERD</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Rolling Upon My Day - Dome</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Ponderosa (Original Instrumental) - Tricky</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Clannad - The Hunter</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Better Now - Barbro</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Havoc - Always Have Choice (instrumental)</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Brake Fluid Promo - Reginald Wrangler</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Trystero - Green Flowers</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Partir Y Renunciar - Rosario Bléfari</span></li>
+          <li><span class="track-num">12</span><span class="track-title">I Can't Forget Tomorrow - Sylvain Sylvain</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Rakastuin mä looseriin - Nylon Beat</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Perfidia - Phyllis Dillon</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Somewhere Good - Tara Clerkin Trio</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Dreamer [Ecu Mix] - Coldcut</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Special Touch - Garden of Life</span></li>
+          <li><span class="track-num">18</span><span class="track-title">You Can Be Weird With Me - Philippa Rice</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Chasse à l'homme - Pierre Cavalli</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Candy Darling & The Viscounts - Movin'</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Ben Hackett - Music for Wood and Tape</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Nick Holder - Infinisynth</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ylN99Z-9AuSsSjNECPhuN1r"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">February</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Wendy and Lisa - Honeymoon Express</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Josh da Costa - Skygirl</span></li>
+          <li><span class="track-num">3</span><span class="track-title">josh da costa - sleepy babe</span></li>
+          <li><span class="track-num">4</span><span class="track-title">The New Age Orchestra - Let's Dream Together (Gerd Janson Remix)</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Bullwinkle Pt. II - The Centurians</span></li>
+          <li><span class="track-num">6</span><span class="track-title">The Puppets - The Way Of Life (Dance Mix)</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Sharpe & Numan - Change Your Mind</span></li>
+          <li><span class="track-num">8</span><span class="track-title">NOBEL - TURN ON YOUR RADIO '85</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Radio Movie - Do What You Want</span></li>
+          <li><span class="track-num">10</span><span class="track-title">DESIRE - COLD AS ICE (Demo Version)</span></li>
+          <li><span class="track-num">11</span><span class="track-title">@youloveher 2007 - You Love Her</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Midnight In Harlem - Tedeschi Trucks Band</span></li>
+          <li><span class="track-num">13</span><span class="track-title">New Scene - F-16 Margorpidim</span></li>
+          <li><span class="track-num">14</span><span class="track-title">O SAL DA TERRA - BETO GUEDES</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5yk-qu1XCnqlgWxH3RUWRwvv"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">January</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Ralf Hildenbeutel - Inner Peace</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Summer Rain - Suzanne Menzel</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Khotin - Water Soaked In Forever</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Lee Project - Minutes By Minutes</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Where the Party At (Speakeasy Dub Mix) - Jagged Edge</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Tapp - Blow It Up (XXX Club Mix)</span></li>
+          <li><span class="track-num">7</span><span class="track-title">On My Own - Mr. Real</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Los Angeles: Critical Mass [Full Album] (1998)</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Windows Down - Willie Burns</span></li>
+          <li><span class="track-num">10</span><span class="track-title">1838 - K. Yoshimatsu</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Primitive Motion - People See The Solar Flow</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Magia (Bola de Cristal Mentia) - José Pinhal</span></li>
+          <li><span class="track-num">13</span><span class="track-title">jose pinhal viver a vida</span></li>
+          <li><span class="track-num">14</span><span class="track-title">jose pinhal caminhemos</span></li>
+          <li><span class="track-num">15</span><span class="track-title">jose pinhal quem nao me quer</span></li>
+          <li><span class="track-num">16</span><span class="track-title">jose pinhal ciganos</span></li>
+          <li><span class="track-num">17</span><span class="track-title">jose pinhal apaixonado</span></li>
+          <li><span class="track-num">18</span><span class="track-title">jose pinhal tu es a que quero</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Tedra - Kenny Larkin</span></li>
+        </ol>
+      </div>
     </div>
   </section>
 
-<div class="site-wrapper">
+  <!-- ════════════════ 2025 ════════════════ -->
+  <section class="year-section">
+    <h2 class="year-heading">2025</h2>
+    <div class="playlist-grid">
 
-  <!-- ── Intro ── -->
-  <section class="intro">
-    <div class="intro-role">Technical Producer / Technical Director — Broadcast, Experiential &amp; Events</div>
-    <p class="intro-bio">Placeholder sentence one describing your background, approach, and the kind of work you do. Placeholder sentence two expanding on your expertise and what makes your work distinctive.</p>
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ynay9ca86NW7_tC77k7BaCH"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">December</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Günter Schickert - Suleika</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Wayne Marshall - Ganja (Refix)</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Les Biscuits Salés - Entra En Mi Onda</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Ragysh - Todd Terje</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Transparency (Mixed) - Release</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Verónica Castro - Macumba</span></li>
+          <li><span class="track-num">7</span><span class="track-title">HOT PEPPER - Camino Equivocado</span></li>
+          <li><span class="track-num">8</span><span class="track-title">L.U.P.O. - Hell or Heaven (Extended Mix)</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ymOLGTSjpjlsp4Aedv3lpXK"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">November</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Jose Padilla - Adios Ayer (Paul Daley Remix)</span></li>
+          <li><span class="track-num">2</span><span class="track-title">The Edge Of Infinity - Missing Channel</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Justus Köhncke: Timecode</span></li>
+          <li><span class="track-num">4</span><span class="track-title">who knew - username</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Slow Attack Ensemble - Dance Four</span></li>
+          <li><span class="track-num">6</span><span class="track-title">NY House'N Authority - Apt 3b</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Keshukoran - Sister Irene O'Connor</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Madreblu - Certamente</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Syncbeat - Music (Boris Dlugosch Remix)</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Mango - Bella d'Estate</span></li>
+          <li><span class="track-num">11</span><span class="track-title">The Beauty of Celeste - Mr. Fingers</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Humans - Malka Spigel</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Oasis - Ashra</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ynrPkDRH-R9PpEsu6gBEMDC"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">October</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Alexander Robotnick - Problemes D'Amour (Kenny Dixon Jr Mix)</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Good dub - Reality Souljahs</span></li>
+          <li><span class="track-num">3</span><span class="track-title">One More Try - timmyt</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Predador de Perereca</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Harry Case - Air Dancer</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Heaven Tomorrow - Release</span></li>
+          <li><span class="track-num">7</span><span class="track-title">D'Note - D'Votion</span></li>
+          <li><span class="track-num">8</span><span class="track-title">New Age Rising (Part VIII) - Akis</span></li>
+          <li><span class="track-num">9</span><span class="track-title">World That's Not Real - Gloria Taylor</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Everything Turns Grey - Agent Orange</span></li>
+          <li><span class="track-num">11</span><span class="track-title">This Must Be the Place - Pet Shop Boys</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Heidi Montag - I'll Do It</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Spanish Joint - D'Angelo</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Wigs - Prefab Sprout</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Real Life - Acopia</span></li>
+          <li><span class="track-num">16</span><span class="track-title">PLASTIC BAMBOO - Ryuichi Sakamoto</span></li>
+          <li><span class="track-num">17</span><span class="track-title">laraaji - all of a sudden</span></li>
+          <li><span class="track-num">18</span><span class="track-title">System Olympia - We Fold</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Liza Minnelli - Don't Drop Bombs</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Liza Minnelli - Don't Drop Bombs (UK 12'')</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Luis Miguel - Luz verde</span></li>
+          <li><span class="track-num">22</span><span class="track-title">South - Paint the Silence</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5yk9rL5IrHSnY_Eh1GCVPynR"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">September</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">liljerryspringer cocteautwinsremix</span></li>
+          <li><span class="track-num">2</span><span class="track-title">LOVE'S GOT THE FEELING - N W 10</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Miscellen - Stone Fruit I</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Matthew Herbert - It's Only (DJ Koze Remix)</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Heavens Airport Coffee Shop Restaurant - THE STARSEEDS</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Innermost Call - Cabeiri</span></li>
+          <li><span class="track-num">7</span><span class="track-title">New Composers - Love of Nature</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Shinobi Music Collection - Spirit (Valley 1)</span></li>
+          <li><span class="track-num">9</span><span class="track-title">My Suitor - Berntholer</span></li>
+          <li><span class="track-num">10</span><span class="track-title">How Do You Plead? - St Germain</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Nadeem Khan - Tak Tu Tak Tutiyan</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Crisrail - November 18, 1983 (Dub Version)</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Plastic World - Roy Rutanen</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Tree to the Wind - Teisco</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ymiQ_qhunGL6OSLYNjemCrI"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">August</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Dancing Fantasy - Dancing On A Summer Night With You</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Fear of Pop - In Love (Thievery Corporation Mix)</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Bell Towers - I'm Obsessed With You</span></li>
+          <li><span class="track-num">4</span><span class="track-title">A Love from Outer Space - A.R. Kane</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Cassegrain - Trappist (The Mover Remix)</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Ultraworld - Northern Piano</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Dream Boat (Edit) - Rhode & Brown</span></li>
+          <li><span class="track-num">8</span><span class="track-title">BARBARA ROY - Gotta See You Tonight</span></li>
+          <li><span class="track-num">9</span><span class="track-title">zhi ji zhi bi - faye wang</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Software On Request - CH.OP.</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Speedwell (The Aloof Mix) - Saint Etienne</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Fresh Color - Disco Nature</span></li>
+          <li><span class="track-num">13</span><span class="track-title">RICHARD STRANGE & THE ENGINE ROOM - Damascus</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Journey to Silius - Title Theme</span></li>
+          <li><span class="track-num">15</span><span class="track-title">NTU - Bobby Hutcherson</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Benny Pitcher - Transatlantic Motion</span></li>
+          <li><span class="track-num">17</span><span class="track-title">For An Angel (PvD's E-Werk Club Mix) - Paul van Dyk</span></li>
+          <li><span class="track-num">18</span><span class="track-title">DJ Chus & David Penn - Baila (Dennis Ferrer Mix)</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Spoken Word - David Alvarado</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Sea People - Opus III</span></li>
+          <li><span class="track-num">21</span><span class="track-title">SYNTH JUNCO HOLA MI AMOR</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Graces State - Swayzak</span></li>
+          <li><span class="track-num">23</span><span class="track-title">You're never too young - The Cool Notes</span></li>
+          <li><span class="track-num">24</span><span class="track-title">FRANKIE GOES TO HOLLYWOOD - Rage Hard</span></li>
+          <li><span class="track-num">25</span><span class="track-title">ONE DOVE - fallen</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Oli XL - Clumsy</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Vanessa Daou - Sunday Afternoons</span></li>
+          <li><span class="track-num">28</span><span class="track-title">instrumental no. 2 - my bloody valentine</span></li>
+          <li><span class="track-num">29</span><span class="track-title">Abacus - We Cookin' Now</span></li>
+          <li><span class="track-num">30</span><span class="track-title">CRW - I Feel Love</span></li>
+          <li><span class="track-num">31</span><span class="track-title">Dj Taucher - Happiness</span></li>
+          <li><span class="track-num">32</span><span class="track-title">Paul McCartney - Deliverance (The Steve Anderson Remix)</span></li>
+          <li><span class="track-num">33</span><span class="track-title">Sidewalk University - Version</span></li>
+          <li><span class="track-num">34</span><span class="track-title">Danny keith - Love me again</span></li>
+          <li><span class="track-num">35</span><span class="track-title">Mungo's Hi Fi - Bike Rider Ft Pupajim</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ykFOlsjMQ1KJQsErxIFMoTr"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">July</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Depeche Mode - It's No Good (extended mix)</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Ulysses Horizons - Pallas</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Michelle Hart - Where Did Love Go</span></li>
+          <li><span class="track-num">4</span><span class="track-title">ERROL DUNKLEY - Movie Star</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Mica Paris - Should've Known Better</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Break Machine: Street Dance (instrumental)</span></li>
+          <li><span class="track-num">7</span><span class="track-title">SHENLEY DUFFUS I BET YOU DON'T KNOW</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Bring Life - Kalado</span></li>
+          <li><span class="track-num">9</span><span class="track-title">The Root - Cabaret Voltaire</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Fresh - Kool & The Gang SonicC Bootleg Remix</span></li>
+          <li><span class="track-num">11</span><span class="track-title">james K - Doom Bikini</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Mr Master - A Dog In The Night</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Video Kids - Woodpeckers From Space</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ymlZNundsx3leDMO8Ja1koU"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">June</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Onnyx - Generations On X (Groove Man's Hyppo Therapy Mix)</span></li>
+          <li><span class="track-num">2</span><span class="track-title">DJ Lava - Over & Over</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Fez Up - Guy Klucevsek</span></li>
+          <li><span class="track-num">4</span><span class="track-title">5 To 7 PM - Ziad Rahbani</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Chambre 606 - Alex Cortiz</span></li>
+          <li><span class="track-num">6</span><span class="track-title">through (Remastered) - 800 Cherries</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Mark A. Mitchell - How Can I?</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Kleeer - Intimate Connection</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Will Hofbauer - Diiing</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Le porte d'incanto - Tamburi Neri</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ymBGLHLGxl0IZPObORqamPk"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">May</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">I See Signs Everywhere - Sam Gendel</span></li>
+          <li><span class="track-num">2</span><span class="track-title">I Could Get Used to This - 'Til Tuesday</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Carl Thomas - I Wish</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Time - Lonesome Zephyr</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Mylène Farmer - Ainsi soit je</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Felt - Evergreen Dazed</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Love in the Darkness - Offering</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Club House - Do it again Billie Jean</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Mato Grosso - Thunder (Bangi Remix)</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Sizike - Cudni ples</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Assumptions (slowed) - sam gellaitry</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Dead Eyes Opened - Severed Heads</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Burning Flame - Felix Dickinson</span></li>
+          <li><span class="track-num">14</span><span class="track-title">F*Connection - Hold Me</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Dissolve Into Eternity - DJ Erased</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Dream 2 Science</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Love Me - Love & Rockets</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Cruise Control - Headless Chickens</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Duke Ellington & John Coltrane - In a sentimental mood</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ymTI4S38bUAm7G9ijNNPohQ"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">April</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Bardeux - When We Kiss</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Washed Away (2025 String Mix) - Release</span></li>
+          <li><span class="track-num">3</span><span class="track-title">A.M. O.K. - Long Time Ago</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Freemason (Hysteric Edit 2021) - Boxcar</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Lily Ann - Going Crazy</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Bon Rock - It's Alright</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Café del Mar Ibiza Chillout Mix VI (2025)</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Oxygen - R_R_</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Inc-line - R_R_</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Ah - R_R_</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Seamless - R_R_</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Latvian Seaside Memory - R_R_</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Side to Side - R_R_</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Coastal Wind at 9pm - R_R_</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5yn6oLfL4ZoTVNU_4DoGNAtl"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">March</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Sonya Spence - Let Love Flow On</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Cheb Ferrani - Youm Elhad Ouafitzine</span></li>
+          <li><span class="track-num">3</span><span class="track-title">NIRVANA - Paxslim</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Hex - Fire Island</span></li>
+          <li><span class="track-num">5</span><span class="track-title">And So I Dance - Mr. Fingers</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Mood II Swing - Move Me Dub</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Saida Fikri - على الهامش</span></li>
+          <li><span class="track-num">8</span><span class="track-title">ဇာလီနိုင် - Bad Boyfriend</span></li>
+          <li><span class="track-num">9</span><span class="track-title">麥潔文 - 愛跳舞的少女</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Deep Choice - Children Trip</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Gee Tagbas - Rap Dazz</span></li>
+          <li><span class="track-num">12</span><span class="track-title">It's No Good Instrumental - Depeche Mode</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Sinéad O'Connor - I Am Stretched on Your Grave</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Schneider TM, Frogtoise</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Mix 54: Mo' Wax Tripped Out Jamz</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Texas - Inner Smile</span></li>
+          <li><span class="track-num">17</span><span class="track-title">HEIR APPARENT - Tear down the walls</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ym1GaZSgyTpMIjaARwM2Tqg"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">February</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Nerious Joseph & Tenorfly - My Girl (DJ Kenneth Remix)</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Aaleluia & Os Garimpeiros - Sarna Do Big Brother</span></li>
+          <li><span class="track-num">3</span><span class="track-title">M.G.M. - Dança da Desbunda</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Camilo Travassos - Nunca Foi</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Gang Morenos - N'dombolô</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Amine - دلال</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Ruby - روحي فيك</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Ruby - بتقول ده ليه</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Dalila - موسيقى</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Kadem Ray - صابر</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Cheb Abdelhak - Hbek Hebelni</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Abdelwahab Staifi - Ya Tofla</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Houcine - Berkani</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Cheb Nacer - مالو مالو</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Lotfi Double Kanon - Chkoune Li Moute</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Cheb Nacer - Bombom</span></li>
+          <li><span class="track-num">17</span><span class="track-title">DJ Feddy - The Power</span></li>
+          <li><span class="track-num">18</span><span class="track-title">DJ Feddy - Kuduro</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Anu Malik & Hema Sardesai - Jaanam Samjha Karo</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Asha Bhosle - Kambakth Ishq</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Tunnel Dancers - Patterns & Systems</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Sing For The Kid - Nate Joël</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Passages - Bowery Electric</span></li>
+          <li><span class="track-num">24</span><span class="track-title">james K - HypersoftLovejinxJunkdream</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Heavens Airport Coffee Shop Restaurant - THE STARSEEDS</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Debbie Mckayle - Necesito Tu Amor</span></li>
+          <li><span class="track-num">27</span><span class="track-title">MESSAGE FROM BRAZIL - Doriano</span></li>
+          <li><span class="track-num">28</span><span class="track-title">Bark Psychosis - Pendulum Man</span></li>
+          <li><span class="track-num">29</span><span class="track-title">Kik Slick - Slick Shoota</span></li>
+          <li><span class="track-num">30</span><span class="track-title">dj krush - yeah</span></li>
+          <li><span class="track-num">31</span><span class="track-title">BossMan Dlow - Mr Pot Scraper</span></li>
+          <li><span class="track-num">32</span><span class="track-title">Fantastic Cat - Takako Minekawa</span></li>
+          <li><span class="track-num">33</span><span class="track-title">Alkalino - Take Control</span></li>
+          <li><span class="track-num">34</span><span class="track-title">King Lajo & Oemar - Schudde</span></li>
+          <li><span class="track-num">35</span><span class="track-title">Bloodfire - In Heaven Everything is Fine</span></li>
+          <li><span class="track-num">36</span><span class="track-title">Vegyn - A Dream Goes On Forever</span></li>
+          <li><span class="track-num">37</span><span class="track-title">Columbus (Time Killed Version) - Torn Hawk</span></li>
+          <li><span class="track-num">38</span><span class="track-title">John Glacier - Don't Cover Me</span></li>
+          <li><span class="track-num">39</span><span class="track-title">Cisco Ferreira - Cisco's Groove</span></li>
+          <li><span class="track-num">40</span><span class="track-title">Elvin T - Get What U Need</span></li>
+          <li><span class="track-num">41</span><span class="track-title">Washed Away (Dub Mix) - Release</span></li>
+          <li><span class="track-num">42</span><span class="track-title">I Want You (For Myself) - Sandy Rivera</span></li>
+          <li><span class="track-num">43</span><span class="track-title">Braga Circuit - DOML</span></li>
+          <li><span class="track-num">44</span><span class="track-title">E2-E4 (Mad Professor Remix) - Alex Kassian</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ykErsJmm5M_VTcBYSuEJO2s"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">January</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Tek 9 - DJ Smokey</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Rita Poser - Rita P</span></li>
+          <li><span class="track-num">3</span><span class="track-title">antenne - Like rain</span></li>
+          <li><span class="track-num">4</span><span class="track-title">The Hunter - Clannad</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Baltimore - Nina Simone</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Judy And Lynda - Baltimore Sam Don</span></li>
+          <li><span class="track-num">7</span><span class="track-title">These Are The Things About You - IVY</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Dajae - Day By Day (Chez 'N' Trent Vocal Mix)</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Boodie Track - Connie's Crew</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Sans contrefaçon (Mix 2001) - Mylène Farmer</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Mali B-flat - The Magic Violin</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Foolish Mind - You One Night In The Future</span></li>
+          <li><span class="track-num">13</span><span class="track-title">CAKEDOG - SLIDE THRU</span></li>
+        </ol>
+      </div>
+    </div>
   </section>
 
-  <!-- ── Selected Work ── -->
-  <section class="works">
-    <div class="section-label">Selected Work</div>
+  <!-- ════════════════ 2024 ════════════════ -->
+  <section class="year-section">
+    <h2 class="year-heading">2024</h2>
+    <div class="playlist-grid">
 
-    <!-- Project 1: A24 -->
-    <div class="project">
-      <div class="project-title-block">
-        <div class="project-client">A24</div>
-        <h2 class="project-title">Marty Supreme<br>Zoom Call</h2>
-      </div>
-      <div class="project-meta">
-        <p class="project-desc">A viral marketing video presented as a "leaked" internal brand meeting featuring Timothée Chalamet pitching increasingly absurd and grandiose ideas for his film Marty Supreme.</p>
-        <div class="project-role-label">Role</div>
-        <div class="project-role-detail">Technical Producer, Assistant Director — Managed remote video production studio pulling ten separate 1080p feeds from around the world. Directed pick-up shots and assisted talent with technical needs.</div>
-      </div>
-      <div class="project-video">
-        <div class="video-frame">
-          <iframe src="https://player.mediadelivery.net/embed/628083/60de218f-ae7a-4a33-b667-44e4a8537724?autoplay=true&loop=true&muted=true&preload=true" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0;" allow="autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe>
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ylFeJmD0hu2mOMlZRocD8dm"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
         </div>
+        <div class="card-label">December</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Love Spirals Downwards - Nova</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Indeep - The Rapper (Instrumental)</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Kwasi Afari Minta - Barima Nsu</span></li>
+          <li><span class="track-num">4</span><span class="track-title">9lives - ABU DHABI (w/ Lancey Foux)</span></li>
+          <li><span class="track-num">5</span><span class="track-title">I Wanna Love U in My Life - Dove</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ynKIBIxDfuVa7bbulgRCJcL"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">November</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Iggy's Theme - Release</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Dust beam - ML Buch</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Leo - Jeanette</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Disco Inferno - Love Stepping Out</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Ai No Corrida - Quincy Jones</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Javier Segura - Malagueñas 2</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Fiona is that a ghost behind you?!</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Daichi - Aja Aja</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Arza - beatsbuba</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Skatebård - June Nights South of Siena</span></li>
+          <li><span class="track-num">11</span><span class="track-title">75 to Seafront (Sesto Senso Remix) - Señor Chugger</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Love Will Find a Way - Pharoah Sanders</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Spinnaker - The Spirit of America</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Julianne - Visions</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Darkangeles - Ed's Place</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Wally BADAROU - one day</span></li>
+          <li><span class="track-num">17</span><span class="track-title">New Drank Freestyle</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Nah fam I'm listening to music</span></li>
+          <li><span class="track-num">19</span><span class="track-title">EUPHORIA - John T. Gast</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Jeanette Dwyer - Leo (Extended Remix)</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Typical - Frazier Chorus</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Jaco Pastorius Trio - Dear Prudence</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Disco 84 - Laxmikant–Pyarelal</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Fracture - Shada Shada feat Nah Eeto</span></li>
+          <li><span class="track-num">25</span><span class="track-title">FRUTIGER AERO - Kooxla</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Framboisier - Holodisk Data</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Cheikha Rimitti - C'est fini</span></li>
+          <li><span class="track-num">28</span><span class="track-title">Scircura - Chas Smith</span></li>
+          <li><span class="track-num">29</span><span class="track-title">Mecano - Links (Dark Side Extended Mix)</span></li>
+          <li><span class="track-num">30</span><span class="track-title">Astrid Monroe - I Kill You</span></li>
+          <li><span class="track-num">31</span><span class="track-title">Don't Run Away - The British North American Act</span></li>
+          <li><span class="track-num">32</span><span class="track-title">Xymox - Dreamhouse</span></li>
+          <li><span class="track-num">33</span><span class="track-title">Change - Mutual Attraction</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ymqtLsrYSchxIgYhUc2PY0v"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">October</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Movin' out (Anthony's Song) - The Supervillains</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Manu Dibango - Besoka On Salsa</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Filhos De Gandhi - Gilberto Gil</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Wade In The Water - Ellen McIlwaine</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Alfonso Noel Lovo - Terremoto</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Eli Escobar - N.Y. So Hi</span></li>
+          <li><span class="track-num">7</span><span class="track-title">The Sound Of Someone You Love Who's Going Away - Penguin Cafe</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Cold Beer Conversation - George Strait</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Kimba (Club-House Mix) - Jingle Stream</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Kattarh - Niagara</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Todos o ninguno - La Logia Sarabanda</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Les McCann - Sometimes I Cry</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Nortec Collective: Terrestre - El Lado Oscuro</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Kirsty MacColl - Walking Down Madison</span></li>
+          <li><span class="track-num">15</span><span class="track-title">I Love You Always Forever (Sylk 130 Remix) - Donna Lewis</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Automat (Remastered) - Romano Musumarra</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Laurie Mayer - Bright Blue Night</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Near Legendary Blind Eye - Cobalt Blue Fox</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Window Smashers - Faraway</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Conrad Waldron - Your Love Is A Voodoo</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Nu2U - Geneva Jacuzzi</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Tambours D'eau - Afro-Disiak</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Kettel - Embolaze (Remixed by Max)</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Bandelero Desperado - MJ Cole</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Marina Van Rooy - Magic Ice Girl</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Cathy Gilliat - Need</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Open Spaces - Sunrise Paradise Garage</span></li>
+          <li><span class="track-num">28</span><span class="track-title">Atiba Jefferson - Something for the Ax</span></li>
+          <li><span class="track-num">29</span><span class="track-title">Bandelero Desperado (slowed and reverb)</span></li>
+          <li><span class="track-num">30</span><span class="track-title">Esto Es Un Elefante? - Gerardo Batiz</span></li>
+          <li><span class="track-num">31</span><span class="track-title">It Should Be (Free) - Fergus Jones</span></li>
+          <li><span class="track-num">32</span><span class="track-title">Hole Heart - Release</span></li>
+          <li><span class="track-num">33</span><span class="track-title">Gene Moss - I Want To Bite Your Hand</span></li>
+          <li><span class="track-num">34</span><span class="track-title">Steve Reich - Octet (Eight Lines)</span></li>
+          <li><span class="track-num">35</span><span class="track-title">Wena - DJ Sumthyn Black</span></li>
+          <li><span class="track-num">36</span><span class="track-title">Die Dämmerung von Nanotech - Der Zyklus</span></li>
+          <li><span class="track-num">37</span><span class="track-title">Mk.gee - ROCKMAN</span></li>
+          <li><span class="track-num">38</span><span class="track-title">Di Melo - A.E.I.O.U.</span></li>
+          <li><span class="track-num">39</span><span class="track-title">Sloth River - Tomasz Bednarczyk</span></li>
+          <li><span class="track-num">40</span><span class="track-title">Appa - Wú Wéi Liila</span></li>
+          <li><span class="track-num">41</span><span class="track-title">Deutsche Wertarbeit - Guten Abend Leute</span></li>
+          <li><span class="track-num">42</span><span class="track-title">El silencio de los cisnes - El Último Sueño</span></li>
+          <li><span class="track-num">43</span><span class="track-title">I Want You Now - Linear Movement</span></li>
+          <li><span class="track-num">44</span><span class="track-title">Mark Stewart + Maffia - The Paranoia Of Power</span></li>
+          <li><span class="track-num">45</span><span class="track-title">Francois K - Moov</span></li>
+          <li><span class="track-num">46</span><span class="track-title">Prince - 17 Days (Nenor Remix)</span></li>
+          <li><span class="track-num">47</span><span class="track-title">Tayla - Stargazing</span></li>
+          <li><span class="track-num">48</span><span class="track-title">Stay Flee Get Lizzy - No Refunds</span></li>
+          <li><span class="track-num">49</span><span class="track-title">Yeat & Summrs - GO2WORK</span></li>
+          <li><span class="track-num">50</span><span class="track-title">Turbojazz Like You feat Rona Ray - Sean McCabe Remix</span></li>
+          <li><span class="track-num">51</span><span class="track-title">Shawn Christopher - Make My Love (Kerri Chandler Mix)</span></li>
+          <li><span class="track-num">52</span><span class="track-title">These Dayz - SUDI</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ynEBVobaEqie13vEUBs8Y2j"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">September</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">X-Cetra - Wasn't There</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Relax Your Mind - Space Ghost</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Adonis & Charles B - Lack Of Love</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Las rosas en el límite - Boundary</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Del Sol - Manuel Darquart</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Cabaret Voltaire - Sensoria</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Ilija Rudman Umma Original mix</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Ilija Rudman - U.M.M.A.</span></li>
+          <li><span class="track-num">9</span><span class="track-title">IL BOSCO - NOREA SON</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Hippychick - Soho</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Implosion - Green Dawn</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Brass Construction - Movin'</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Change - Crazy Penis</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Crazy P - Sonar</span></li>
+          <li><span class="track-num">15</span><span class="track-title">µ-Ziq - Twangle Frent</span></li>
+          <li><span class="track-num">16</span><span class="track-title">The Infinite Wheel - Te Deum Dub</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Crazy P - Heartbreaker</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Supersonic Seka - The Mindmirror</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Slums Of Grand Central - Daze</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Coma Tunnel (Tornhawked) - Grey People</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Cali Beach - Il Bosco edit</span></li>
+          <li><span class="track-num">22</span><span class="track-title">INTELLIGENCE DEPT. - sleeping city</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Afro Lypso - Mongo Santamaría</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Sparks - When I'm With You</span></li>
+          <li><span class="track-num">25</span><span class="track-title">That Thing with the Rabbit - Headache</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Sun Lady - Statement Soul Wun</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Bucket Listener - Headache</span></li>
+          <li><span class="track-num">28</span><span class="track-title">Time Well Spent - Vegyn</span></li>
+          <li><span class="track-num">29</span><span class="track-title">DJ Red Alert & Mike Slammer - In Effect</span></li>
+          <li><span class="track-num">30</span><span class="track-title">trickpony - Room To Breathe</span></li>
+          <li><span class="track-num">31</span><span class="track-title">Akio - Phoenix At Desert</span></li>
+          <li><span class="track-num">32</span><span class="track-title">Jose Padilla - Cafe Del Mar 1991 (Mixtape 1)</span></li>
+          <li><span class="track-num">33</span><span class="track-title">Jose Padilla - Cafe Del Mar 1991 (Mixtape 2)</span></li>
+          <li><span class="track-num">34</span><span class="track-title">Virtual Dreams: Ambient Explorations</span></li>
+          <li><span class="track-num">35</span><span class="track-title">Tubular Affair (Vocal) - Samoa Park</span></li>
+          <li><span class="track-num">36</span><span class="track-title">The Splash Band - Das Philadelphia Experiment</span></li>
+          <li><span class="track-num">37</span><span class="track-title">Heaven 17 - Let Me Go</span></li>
+          <li><span class="track-num">38</span><span class="track-title">PETER GODWIN - Emotional disguise (instrumental)</span></li>
+          <li><span class="track-num">39</span><span class="track-title">Get Back (Tom Sharkett Remix) - pip blom</span></li>
+          <li><span class="track-num">40</span><span class="track-title">Book Of Life - Verlorene Seelen</span></li>
+          <li><span class="track-num">41</span><span class="track-title">Eleven Pond - Watching Trees</span></li>
+          <li><span class="track-num">42</span><span class="track-title">Xymox - Obsession (Club Mix)</span></li>
+          <li><span class="track-num">43</span><span class="track-title">Joanna Law - First Time Ever</span></li>
+          <li><span class="track-num">44</span><span class="track-title">Tania Maria - Come With Me</span></li>
+          <li><span class="track-num">45</span><span class="track-title">Sergio Mendes - Pais Tropical</span></li>
+          <li><span class="track-num">46</span><span class="track-title">Len - Man of the Year</span></li>
+          <li><span class="track-num">47</span><span class="track-title">Etienne Daho - Idéal</span></li>
+          <li><span class="track-num">48</span><span class="track-title">Freaky Chakra - Glimmer Of Dope Theme 3</span></li>
+          <li><span class="track-num">49</span><span class="track-title">6 Pack and Cigarettes</span></li>
+          <li><span class="track-num">50</span><span class="track-title">Breathe - Telepopmusik</span></li>
+          <li><span class="track-num">51</span><span class="track-title">George T - Interactive Night</span></li>
+          <li><span class="track-num">52</span><span class="track-title">Man Machine feat Zen - Denkimi Shakuhachi</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ykAzKpTcNPclEHOpMAQw5Pp"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">August</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Curtisy - Wok To Blackrock</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Junior H - El Blanco</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Gorillaz - Dirty Harry (Instrumental)</span></li>
+          <li><span class="track-num">4</span><span class="track-title">The Way Love Is - Soul Connection</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Klubb Kidz - Come On</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Robert Aaron - Intoxication</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Alan Barnes - Come with Me</span></li>
+          <li><span class="track-num">8</span><span class="track-title">The System - Find It In Your Eyes</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Amelia Cove - Devin Morrison</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Steven Julien - Wraap't feat. Fatima</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Kobe Bryant - Who Da Neighbors</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Special Touch - Music</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Madonna - Why's It so Hard</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Change / Love - Soul Connection</span></li>
+          <li><span class="track-num">15</span><span class="track-title">ROB49 - Off Dat Drank</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Drake - Rich Baby Daddy ft. SZA & Sexyy Red</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Basement Jaxx - Romeo</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Popof - Do You Want Me</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Oval - Store Check</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Ace of Seafood Complete Original Soundtrack</span></li>
+          <li><span class="track-num">21</span><span class="track-title">The Gripper - Sly</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Madda Dan Rhythm - Release</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Te Quiero - Ksm</span></li>
+          <li><span class="track-num">24</span><span class="track-title">R.A.W - Asuca</span></li>
+          <li><span class="track-num">25</span><span class="track-title">El Cantor - Toma</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Sueño Latino - Viciosa</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Drown in the Clouds of Dew - Rozie Ramati</span></li>
+          <li><span class="track-num">28</span><span class="track-title">Twelve Miles High - Burger/Ink</span></li>
+          <li><span class="track-num">29</span><span class="track-title">Easy Going - Baby I Love You</span></li>
+          <li><span class="track-num">30</span><span class="track-title">Alias - Chew the Fat</span></li>
+          <li><span class="track-num">31</span><span class="track-title">Mystery Tiime - Thank You Deeply</span></li>
+          <li><span class="track-num">32</span><span class="track-title">BSS - Jannis</span></li>
+          <li><span class="track-num">33</span><span class="track-title">Anatolian Weapons - Just Dance</span></li>
+          <li><span class="track-num">34</span><span class="track-title">comforter2 - 14 (Peach Remix)</span></li>
+          <li><span class="track-num">35</span><span class="track-title">Lee Burton - Party Crusher</span></li>
+          <li><span class="track-num">36</span><span class="track-title">Prins Thomas - Whiskey</span></li>
+          <li><span class="track-num">37</span><span class="track-title">musclecars Hello - Maurice Fulton Remix</span></li>
+          <li><span class="track-num">38</span><span class="track-title">International Music System - Nonline</span></li>
+          <li><span class="track-num">39</span><span class="track-title">Midnight Passion - I need your Love</span></li>
+          <li><span class="track-num">40</span><span class="track-title">Midnight Passion - I Need Your Love (Disco Paese Edit)</span></li>
+          <li><span class="track-num">41</span><span class="track-title">Coti K. - Argonauts</span></li>
+          <li><span class="track-num">42</span><span class="track-title">Melenas - 1000 Canciones (Tim Gane from Stereolab Remix)</span></li>
+          <li><span class="track-num">43</span><span class="track-title">Transmission Towers - Everything</span></li>
+          <li><span class="track-num">44</span><span class="track-title">Can't Be - jawnino</span></li>
+          <li><span class="track-num">45</span><span class="track-title">SBTRKT - OUTSPOKEN</span></li>
+          <li><span class="track-num">46</span><span class="track-title">Gelecekten Anilar - Zeynep Ağcabay</span></li>
+          <li><span class="track-num">47</span><span class="track-title">Deceptacon (DFA Rmx) - Le Tigre</span></li>
+          <li><span class="track-num">48</span><span class="track-title">Von LMO - Outside of Time</span></li>
+          <li><span class="track-num">49</span><span class="track-title">Pylon - Weather Radio</span></li>
+          <li><span class="track-num">50</span><span class="track-title">Joey Ramone - Life's A Gas</span></li>
+          <li><span class="track-num">51</span><span class="track-title">Nite Jewel - What Did He Say</span></li>
+          <li><span class="track-num">52</span><span class="track-title">SYSTEM OLYMPIA - CALL GIRL</span></li>
+          <li><span class="track-num">53</span><span class="track-title">Molina - Organs feat. ML Buch</span></li>
+          <li><span class="track-num">54</span><span class="track-title">Baby Fish Mouth - His Name Is Alive</span></li>
+          <li><span class="track-num">55</span><span class="track-title">I've Been Dying - Single Gun Theory</span></li>
+          <li><span class="track-num">56</span><span class="track-title">Innocence - Reflections</span></li>
+          <li><span class="track-num">57</span><span class="track-title">BLACKGIRL - 90's Girl</span></li>
+          <li><span class="track-num">58</span><span class="track-title">Belong - Realistic</span></li>
+          <li><span class="track-num">59</span><span class="track-title">Basement Jaxx - Daluma</span></li>
+          <li><span class="track-num">60</span><span class="track-title">Ban - Irreal Social</span></li>
+          <li><span class="track-num">61</span><span class="track-title">Wolf MÜller - Pfad des Windes</span></li>
+          <li><span class="track-num">62</span><span class="track-title">The Field Mice - Missing The Moon</span></li>
+          <li><span class="track-num">63</span><span class="track-title">Puma & the Dolphin - Sunset Panorama</span></li>
+          <li><span class="track-num">64</span><span class="track-title">Alaska - Accuse</span></li>
+          <li><span class="track-num">65</span><span class="track-title">21 Savage, Offset & Metro Boomin - Rap Saved Me</span></li>
+          <li><span class="track-num">66</span><span class="track-title">Kenny Allstar - We're Online</span></li>
+          <li><span class="track-num">67</span><span class="track-title">AJ Tracey - Joga Bonito</span></li>
+          <li><span class="track-num">68</span><span class="track-title">Coco & Clair Clair - Kate Spade</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ymxY8hPqGEdJ6hmhpk6M1oy"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">July</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Blak Beat Niks - Celebration Ruff House Dub</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Cool Jack - Just Come (Ralphi's Main Mix)</span></li>
+          <li><span class="track-num">3</span><span class="track-title">False Start Dub - Release</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Pobre Diablo - Julio Iglesias</span></li>
+          <li><span class="track-num">5</span><span class="track-title">All Saints - Pure Shores</span></li>
+          <li><span class="track-num">6</span><span class="track-title">The Sea Of Core Experience - Single Gun Theory</span></li>
+          <li><span class="track-num">7</span><span class="track-title">soft location - the whistling song</span></li>
+          <li><span class="track-num">8</span><span class="track-title">jawnino - Westfield feat. Kibo & James Massiah</span></li>
+          <li><span class="track-num">9</span><span class="track-title">JD Cliffe - BUSS UR HEAD</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Everything But The Girl - Good Cop Bad Cop</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Blinkmoth (July Mix) - james K</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Marina Van-Rooy - Honey Drip (PEEL SESSION)</span></li>
+          <li><span class="track-num">13</span><span class="track-title">John Peel's Marina Van Rooy</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Verticle Lines - Beach Boy</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Kosmic Light Force - Mysterious Waves Celestial Mix</span></li>
+          <li><span class="track-num">16</span><span class="track-title">G-Force - Feel The Force</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Window Smashers - Free To Be</span></li>
+          <li><span class="track-num">18</span><span class="track-title">One Tribe feat Gem - What Have You Done</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Mirah - Of Pressure</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Wishing On A Star - Fresh Four</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Neutron 9000 - Butterfly Holocaust</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Massive Attack - Unfinished Sympathy (Framewerk Rewerk)</span></li>
+          <li><span class="track-num">23</span><span class="track-title">One Dove - White Love (Radio Mix)</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Pet Shop Boys - Violence (Haçienda Version)</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Telepopmusik - Into Everything</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ynURpw7s3eukvZK3QOsyqMu"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">June</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Mappa Mundi - Trance Fusion</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Kate Farrow - Pride And Lovers</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Bell Towers - You Got Me Running</span></li>
+          <li><span class="track-num">4</span><span class="track-title">A.C. Marias - Just Talk</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Natural Essence - Reminiscence (Duosonic Dub)</span></li>
+          <li><span class="track-num">6</span><span class="track-title">RAS CLIFTON - Queen Of The Universe</span></li>
+          <li><span class="track-num">7</span><span class="track-title">PATERNE MAESTRO OKO LELA EPA YA NANI</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Dr. Martini - Bit One</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Lipseye - Don't Worry</span></li>
+          <li><span class="track-num">10</span><span class="track-title">M like moon - Sunlight</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Riccardo Cioni & D.J.F.T. Band - In America</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Nevia Preex - Fly Robin Fly</span></li>
+          <li><span class="track-num">13</span><span class="track-title">r bais - take the love</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Amin Peck - Another Song</span></li>
+          <li><span class="track-num">15</span><span class="track-title">L.U.P.O - Hell Or Heaven Extended Mix</span></li>
+          <li><span class="track-num">16</span><span class="track-title">SHAURI YAKO - Orchestra Super Mazembe</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Massive Attack - Any Love</span></li>
+          <li><span class="track-num">18</span><span class="track-title">ARCHIE WONDER - Cruising</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Young T & Bugsey - 4x4</span></li>
+          <li><span class="track-num">20</span><span class="track-title">hoodie x james K - Scorpio</span></li>
+          <li><span class="track-num">21</span><span class="track-title">S U P E R F L A T - QUESADILLA</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Archie Wonder - Cruizin</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Blue Heron's Tribute 2 PH - Hymn To A Whale Talker</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Teenage Fanclub - Crush On You</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Björk - One Day (Springs Eternal Mix)</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Ethik - Trump Tower</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Shafty - Deep Inside</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ymBxUqfQhKxLaVlL2u8LbVB"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">May</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Home Service - only men fall in love</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Bon Bon - Fcukers</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Sleeves Touch My Elbows - 1tbsp</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Young Scooter - Hard To Handle</span></li>
+          <li><span class="track-num">5</span><span class="track-title">1tbsp - Pioneer Digital Plastic Sound</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Anne Clark - Our Darkness</span></li>
+          <li><span class="track-num">7</span><span class="track-title">The Funkees - Akula Owu Onyeara</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Modest Mouse - Float On (Dan the Automator Remix)</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Pulp - Like a friend</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Bogdan Irkük - Caprice</span></li>
+          <li><span class="track-num">11</span><span class="track-title">M-Beat - Sweet Love</span></li>
+          <li><span class="track-num">12</span><span class="track-title">SoFTT - JaJaJa</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Vegyn - In the Front</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Mount Kimbie - A Figure In The Surf</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Night Tapes - loner</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Mixmaster Morris - Quiet Logic</span></li>
+          <li><span class="track-num">17</span><span class="track-title">POiSON GiRL FRiEND - Love Is...</span></li>
+          <li><span class="track-num">18</span><span class="track-title">SKY H1 - Darklite</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Brontez Purnell - Rudolph Valentino</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Pastor T.L. Barrett - Like a Ship</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Muslimgauze - I Shall Sing Until My Land Is Free</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Mr. Monday - I Can't Breathe When I Look At You</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Luther Vandross - Never Too Much (amapiano edit)</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Global Method - Good Life (Orbital Remix)</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Dancing Fantasy - Voodoo Jammin'</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Haircut One Hundred - Evil Smokestacking Baby</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5yn6UxiJETNIpuKYYw2iBmE9"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">April</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Judy Larsen - Gambling Man</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Benoit B - Drums Symphony</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Red Axes - Tantram Power</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Judy Larsen - Easy Dreaming</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Aonenine - Stems Acoustic Performance</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Nemzzz - 2MS</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Keith LeBlanc - Tasteless Cuts</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Keytronics - Something In That Groove</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Esem - Tetaby</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Brenda Fassie - Ngiyakusaba</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Cold World Hustlers - Stack Yo Pappa</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Lalou - The Facts Of Life</span></li>
+          <li><span class="track-num">13</span><span class="track-title">DΛRKNΣSS - resilience for the broken souls</span></li>
+          <li><span class="track-num">14</span><span class="track-title">ポケモンBW - Battle Theme</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Jimi Hendrix - Machine Gun (Live)</span></li>
+          <li><span class="track-num">16</span><span class="track-title">John Fahey - Sunflower River Blues</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Celadon Plaza: Year Two</span></li>
+          <li><span class="track-num">18</span><span class="track-title">DΛRKNΣSS - THE MYRIAD BOOTLEG COLLECTION V</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Pet Shop Boys - New London boy</span></li>
+          <li><span class="track-num">20</span><span class="track-title">The Duncans - Too Damn Hot</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ynRBVfG-EvMrd9L-VzI0K_E"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">March</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Black A.G. - Fame Goes To Your Head Instrumental</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Tirez Tirez - Uptight</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Meet Point - Play The Night</span></li>
+          <li><span class="track-num">4</span><span class="track-title">SOMA - CAUSIN' MASS HYSTERIA</span></li>
+          <li><span class="track-num">5</span><span class="track-title">400 Blows - Movin (Special Extended Club Remix)</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Leron Carson - Red Lightbulb</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Depeche Mode - In Your Room (the jeep rock mix)</span></li>
+          <li><span class="track-num">8</span><span class="track-title">JT And The Big Family - Moments In Soul</span></li>
+          <li><span class="track-num">9</span><span class="track-title">The Field Mice - I Can See Myself Alone Forever</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Unique 3 - Rhythm Takes Control</span></li>
+          <li><span class="track-num">11</span><span class="track-title">KXB - Remote Discipline</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Move D - In/out</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Xymox - Love Me</span></li>
+          <li><span class="track-num">14</span><span class="track-title">DΛRKNΣSS - archangel of shimokitazawa</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Unique 3 - Rhythm Takes Control (Voice Less)</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Born Under A Rhyming Planet - Analogue Heaven</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Aphrodite - King Of The Beats</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Junior Jack - Thrill Me</span></li>
+          <li><span class="track-num">19</span><span class="track-title">DΛRKNΣSS - relish the downfall</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Thes One - Earth Travelers (Instrumental)</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Trembling Blue Stars - The Rainbow</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Lalomie Washburn - Try My Love</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Jine - Take It To The House</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Section 25 - Crazy Wisdom</span></li>
+          <li><span class="track-num">25</span><span class="track-title">My Mine - Zorro</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Syco and the New Yorkers - Slip Away</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Z-19 - The Night Is Still Young</span></li>
+          <li><span class="track-num">28</span><span class="track-title">Cover Boys - Reality</span></li>
+          <li><span class="track-num">29</span><span class="track-title">Section 25 - Looking from a Hilltop</span></li>
+          <li><span class="track-num">30</span><span class="track-title">Cover Boys - Reality (Hysteric Edit)</span></li>
+          <li><span class="track-num">31</span><span class="track-title">East Village People - Love's Gonna Get You</span></li>
+          <li><span class="track-num">32</span><span class="track-title">Move D - To the Disco '77</span></li>
+          <li><span class="track-num">33</span><span class="track-title">MEO - Weetaay</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5yneqesXey0MsH90S28pDBaB"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">February</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Loreleï - Je Ferai Tout...</span></li>
+          <li><span class="track-num">2</span><span class="track-title">George Martin - Backgammon (Instrumental)</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Moraes Featuring Sally Cortez - Welcome To The Factory</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Mr. Monday - Future (original mix)</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Valentino - Each Time I Touch You</span></li>
+          <li><span class="track-num">6</span><span class="track-title">The Vibe - Accura</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Busy Code - Bianco</span></li>
+          <li><span class="track-num">8</span><span class="track-title">What's Up Baby - Baby Doll House</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Iyabo - Trust In God</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Giovanni T. - Balla Mozzarella</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Del Vall - Esperanza</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Locka Loca - Coco Love</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Simon Jurad - Valery</span></li>
+          <li><span class="track-num">14</span><span class="track-title">D-Rail - Petrol Sunset</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Wind - Luxury</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Hot Sun Trail - Release</span></li>
+          <li><span class="track-num">17</span><span class="track-title">DΛRKNΣSS - a lying angel</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Rebolledo - Guerrero</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Bodyrox - Yeah Yeah (D Ramirez Instrumental)</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Acuario - Rema, Rema, Marinero</span></li>
+          <li><span class="track-num">21</span><span class="track-title">After 7 Music - One Night</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ym2A7bhxk2pWicJmmfO5Adi"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">January</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">nappy 01' - no love 2 feat. Lancey Foux</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Kermesse - Mrs Moon</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Skanna - This Way</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Talk Talk - My Foolish Friend</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Time And Love - Tea For Two</span></li>
+          <li><span class="track-num">6</span><span class="track-title">The Edge - Rowena's Theme</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Luke Wyatt - I Recommend Starman</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Tamaryn - Path to Love</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Theodore Shapiro - Interns Get Started</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Maurice Chevalier - Sweepin' the Clouds Away</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Joe Dassin - Et si tu n'existais pas</span></li>
+          <li><span class="track-num">12</span><span class="track-title">ATAHUALPA - Ultimo Imperio</span></li>
+          <li><span class="track-num">13</span><span class="track-title">DΛRKNΣSS - Echoes of Crime</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Jimmy Mi Carcachita</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Basic Element - This Must Be A Dream</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Loft - Love Is Magic 1994</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Magic Affair - Give Me All You Love</span></li>
+          <li><span class="track-num">18</span><span class="track-title">DΛRKNΣSS - the wounds will heal</span></li>
+          <li><span class="track-num">19</span><span class="track-title">DΛRKNΣSS - domina lament ep</span></li>
+          <li><span class="track-num">20</span><span class="track-title">DΛRKNΣSS - 葉隠聞書 ep</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Thomas Brinkmann - Souls</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Andile - Babe Babe</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Nine Bar - Closing In (Richard Sen Remix)</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Eden Burns - Invercargirl</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Rhythim is Rhythim - Icon</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Rude & Deadly - Give Me a Dubplate</span></li>
+          <li><span class="track-num">27</span><span class="track-title">CA DE BESTIAR - Chicos Salvajes</span></li>
+          <li><span class="track-num">28</span><span class="track-title">Fabiano do Nascimento - Kewere</span></li>
+        </ol>
       </div>
     </div>
-
-    <!-- Project 2: Dua Lipa -->
-    <div class="project">
-      <div class="project-title-block">
-        <div class="project-client">Dua Lipa</div>
-        <h2 class="project-title">Live in Times Square</h2>
-      </div>
-      <div class="project-meta">
-        <p class="project-desc">A surprise, free performance out of a semi trailer to celebrate the release of her third studio album, Radical Optimism. Streamed online and to most screens around Times Square.</p>
-        <div class="project-role-label">Role</div>
-        <div class="project-role-detail">Producer: Live Event Video, Content &amp; Broadcast — Designed event and camera layout, multi-endpoint transmission plan, budget, and vendors. Managed content and live signals sent to a dozen uniquely shaped LED billboards. Oversaw camera crew, mobile satellite truck production, and content capture team.</div>
-      </div>
-      <div class="project-video">
-        <div class="video-frame">
-          <iframe src="https://player.mediadelivery.net/embed/628083/e2558579-edd4-4edf-a681-7a50b0362ead?autoplay=true&loop=true&muted=true&preload=true" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0;" allow="autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 3: Nike -->
-    <div class="project">
-      <div class="project-title-block">
-        <div class="project-client">Nike</div>
-        <h2 class="project-title">SNKRS Live</h2>
-      </div>
-      <div class="project-meta">
-        <p class="project-desc">Interactive live stream programming within the Nike SNKRS App that connects the sneaker community through exclusive content, product reveals, and real-time engagement.</p>
-        <div class="project-role-label">Role</div>
-        <div class="project-role-detail">Design, build, and maintenance of Nike's S23 Studio in New York — including a custom talkback and communication system. Technical Director on over 100 successful live shows to the SNKRS App.</div>
-      </div>
-      <div class="project-video">
-        <div class="video-frame">
-          <iframe src="https://player.mediadelivery.net/embed/628083/d82f3558-f0d7-443d-97f1-34d7773511bf?autoplay=true&loop=true&muted=true&preload=true" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0;" allow="autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe>
-        </div>
-      </div>
-    </div>
-
   </section>
 
-  <!-- ── Footer ── -->
-  <footer>
-    <div class="footer-name">André Violante Ferreira</div>
-    <div class="footer-contact">
-      <a href="/cdn-cgi/l/email-protection#61110d000204090e0d050413210419000c110d044f020e0c">Get in Touch</a>
- 
+  <!-- ════════════════ 2023 ════════════════ -->
+  <section class="year-section">
+    <h2 class="year-heading">2023</h2>
+    <div class="playlist-grid">
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ylnmn1oy_isIvz5NU7SBMMy"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">2023 — Vol. 7</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">The Eternals - Stars</span></li>
+          <li><span class="track-num">2</span><span class="track-title">95 South - Hooked</span></li>
+          <li><span class="track-num">3</span><span class="track-title">slowerpace 音楽 - Barbershop Simulator™</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Hollowphonic - Let Yourself Go</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Callahan & Witscher - Hate the Player feat. Ana Roxanne</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Janet Jackson - Empty</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Wallace - Willow</span></li>
+          <li><span class="track-num">8</span><span class="track-title">The Chemical Brothers - Goodbye (Erol Alkan Rework)</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Eden Burns - Xoh dub</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Dina Summer - Rimini (Fabrizio Mammarella Remix)</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Al Wootton - Vitus</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Everything But The Girl - Take Me (Clifton Mix)</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Al White - Meine Lederjeans</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Kirk Franklin - Stomp (Remix)</span></li>
+          <li><span class="track-num">15</span><span class="track-title">OSCOB - FOLKLORE</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Daft Punk - Aerodynamite</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Imagination - Changes</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Imagination - Changes (Dimitri From Paris Remix)</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Wave Shape - Dark Night (Dea Remix)</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Keiko Lee - The Flame</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Ben Dover - Get Down Tonight</span></li>
+          <li><span class="track-num">22</span><span class="track-title">UK Garage & Club Mix - Brooklyn Loft Party</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Troels Hammer - Trans/For/Mation</span></li>
+          <li><span class="track-num">24</span><span class="track-title">ee - Retrace</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Ulrika Spacek - Victorian Acid</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Martin - Seasons 1 & 2 Intro</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Thomas Dolby - Don't Turn Away</span></li>
+          <li><span class="track-num">28</span><span class="track-title">Basement Jaxx - Always Be There</span></li>
+          <li><span class="track-num">29</span><span class="track-title">Release - Meine</span></li>
+          <li><span class="track-num">30</span><span class="track-title">Harold Melvin & The Blue Notes - The Love I Lost (Dimitri Remix)</span></li>
+          <li><span class="track-num">31</span><span class="track-title">Change - You Are My Melody</span></li>
+          <li><span class="track-num">32</span><span class="track-title">Carol - Breakdown</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ymXtYShKL36pc0xg_WBB0vd"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">2023 — Vol. 6</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Dorothy Ashby - The Windmills Of Your Mind</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Grace Jones - I'm Not Perfect</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Louie Vega - All My Love feat. Robyn</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Adriano Celentano - Prisencolinensinainciusol</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Kraftwerk - Der Telefon Anruf / House Phone</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Gipsy Kings - A Mi Manera</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Freaks - Washing Machine</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Rick Ro$$ - SHAQ & KOBE</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Oliver Coates - Butoh baby</span></li>
+          <li><span class="track-num">10</span><span class="track-title">GENOM - 第二十七の室q</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Bambi Synapse - Baby Mosquito</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Levian - Was ist dein Lieblingsfach</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Jamiroquai - Seven Days in Sunny June</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Ouma Wa Mafegi - Riverside Walk</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Laika - Breather</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Kinderhitparade - Pump auf den Ball</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Jorja Smith - Greatest Gift feat. Lila Iké</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Loose Ends - Don't Be A Fool</span></li>
+          <li><span class="track-num">19</span><span class="track-title">NUANCE Featuring VIKKI LOVE - Loveride</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ymS4W9QWkrjv-jzf070m7TI"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">Summer 2023</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Laserdance - Fear (Remix)</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Secos & Molhados - O Doce e o Amargo</span></li>
+          <li><span class="track-num">3</span><span class="track-title">One Must Fall 2097 - Soundtrack</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Haruomi Hosono / Tadanori Yokoo - Hum Ghar Sajan</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Agni Natchathiram - Raaja Raajathi Song</span></li>
+          <li><span class="track-num">6</span><span class="track-title">In The Nursery - Hallucinations (Dream World Mix)</span></li>
+          <li><span class="track-num">7</span><span class="track-title">DUAL BAND - GSM</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ylARmg1aWff9xmBKKA7ub_O"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">2023 — Vol. 5</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Serious Danger - Battle Plate</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Love Song - Trancefeld</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Alerta - No Es</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Takeo Moriyama - Watarase</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Ahmad Jamal - The Awakening</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Vânia Bastos - Tabu - The Sweetest Taboo</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Organ Tapes - Submission</span></li>
+          <li><span class="track-num">8</span><span class="track-title">High Vis - Trauma Bonds</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Synthesizer Voice (Legowelt Remix) - Pampidoo</span></li>
+          <li><span class="track-num">10</span><span class="track-title">LORNA NELSON - Deh Pon De Low</span></li>
+          <li><span class="track-num">11</span><span class="track-title">CC:DISCO! - Chez Moi feat. Confidence Man</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Masarima - Freak Like U</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Polo & Pan x Red Axes - Desperado feat. Sunoco</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Jamal Moss - Castles In The Skies</span></li>
+          <li><span class="track-num">15</span><span class="track-title">NOTHING - Heavy Water/I'd Rather Be Sleeping</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Midwife - 2020</span></li>
+          <li><span class="track-num">17</span><span class="track-title">The Masqueraders - I'm Just An Average Guy</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Headie One - 18HUNNA ft. Dave</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Neja - Restless</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Secos & Molhados - O Doce e o Amargo</span></li>
+          <li><span class="track-num">21</span><span class="track-title">DUAL BAND - GSM</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Jill Francis - Do Me Right</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Röyksopp - Poor Leno (Silicone Soul's Hypno House Dub)</span></li>
+          <li><span class="track-num">24</span><span class="track-title">THOUXANBANFAUNI - ULTRA VIOLET</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Kwengface - Freedom 2</span></li>
+          <li><span class="track-num">26</span><span class="track-title">oqbqbo & Scandinavian Star - Airdrops</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Esthero - That Girl</span></li>
+          <li><span class="track-num">28</span><span class="track-title">Joe Walsh - Life's Been Good</span></li>
+          <li><span class="track-num">29</span><span class="track-title">Zikomo - Finesse (Zikomo Remix)</span></li>
+          <li><span class="track-num">30</span><span class="track-title">Release - Cosmic Courier</span></li>
+          <li><span class="track-num">31</span><span class="track-title">Günter Schickert - Tsunami</span></li>
+          <li><span class="track-num">32</span><span class="track-title">Yves Tumor - The Feeling When You Walk Away</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ymq42ExOmpIQWUXMnYXP6MH"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">2023 — Vol. 4</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Jerry Rivera - Cara de Niño</span></li>
+          <li><span class="track-num">2</span><span class="track-title">PASTOR LOPEZ - Las caleñas</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Ruff Endz - No More (Club REMIX)</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Ruff Endz ft. Cuban Link - No More (Remix)</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Batu - Traverse</span></li>
+          <li><span class="track-num">6</span><span class="track-title">RNB RUFF ENDZ NO MORE DJ MARIO DZ EXTENDED MIX</span></li>
+          <li><span class="track-num">7</span><span class="track-title">George Michael - Waiting for That Day</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Moloko - Sing It Back</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Os Mutantes - El Justiceiro</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Yves Tumor - Secrecy Is Incredibly Important</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Sustrapperazzi - Say It To Me</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Kavelly - Chapter 1</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Marco Antonio Solís - Si No Te Hubieras Ido</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Spiller - Groovejet</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Hysteric - Lombardoni (Lipelis Disco Megamixxx)</span></li>
+          <li><span class="track-num">16</span><span class="track-title">High Vis - A FIST FOR WHEN YOU'RE DOWN</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ylSUKrcREwgWWVGEpxfyzaT"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">2023 — Vol. 3</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Five Revolutions - Few Bana Zambia</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Tiga - Colours So Bright</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Eddie Warner - Syncopated Motion</span></li>
+          <li><span class="track-num">4</span><span class="track-title">EVIL MIND - Melody of Paradise</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Spice Girls - SAY YOU'LL BE THERE (GAGO POP 80s ReMIX)</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Tom Sharkett + softlizard - Mind In Motion</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Forces - Altered States</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Galaxy 2 Galaxy - Journey of the Dragons</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Chuck Strangers - Venison feat. Navy Blue</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Smoke City - With You</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Thievery Corporation - Until the Morning</span></li>
+          <li><span class="track-num">12</span><span class="track-title">LIL UZI VERT - Watch This</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Eighth Wonder - I'm Not Scared (Disco Mix)</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Dj Kicken vs Sonic Solutions - Louder</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Brothers Of Soul - I Guess That Don't Make Me A Loser</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Spooky - Little Bullet</span></li>
+          <li><span class="track-num">17</span><span class="track-title">LOUI$ - PINK FOOTPATH</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Najee - Betcha don't know</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Medium Medium - Hungry So Angry</span></li>
+          <li><span class="track-num">20</span><span class="track-title">African Head Charge - Off the beaten track</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Keith LeBlanc - Move</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Body Of Light - Never Ever</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ymDJ6h9eUXRan_V3p0cUr-R"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">2023 — Vol. 2</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">tommy guerrero - Organism</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Babyface Ray - Miami in November</span></li>
+          <li><span class="track-num">3</span><span class="track-title">BONES - TheOne</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Greg Foat - Psychosynthesis Part 1</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Lesley Gore - Goodbye Tony</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Lesley Gore - Goodbye Tony (Stereo mix)</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Vitas - The 7th Element</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Andronicus - Make you Whole</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Raphaël Toiné - Femmes pays douces</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Elijah Minnelli - Blue Top</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Talk Talk - Living in Another World</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Black Bones - Coming On Strong (Dub)</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Reptant - Ectoplastic</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Demi Riquísimo - Green Machine</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Will Powers - Smile (Dub)</span></li>
+          <li><span class="track-num">16</span><span class="track-title">nick nicely - on the beach</span></li>
+          <li><span class="track-num">17</span><span class="track-title">23 Skidoo - F.U.G.I.</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Destroy Lonely - CRYSTLCSTLES</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Mari Kvien Brunvoll - Everywhere You Go</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Five Revolutions - Few Bana Zambia</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ykOtCxnbHfrtxdVOiGhe1TJ"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">2023 — Vol. 1.2</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Spencer Kincy - Yesterday and Today Mixtape</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Dirty Vegas - Days Go By</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Freemasons - Love Don't Live Here Anymore feat. Judie Tzuke</span></li>
+          <li><span class="track-num">4</span><span class="track-title">DECIUS - SHOW ME NO TEARS</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Black Bones - T-2017</span></li>
+          <li><span class="track-num">6</span><span class="track-title">nthng - With You</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ylPl_e69gR_97kwUT22Fb0S"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">2023 — Vol. 1</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Spencer Kincy aka Gemini Live @ Deep In The Flowers</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Khotin - Fountain Growth ft. Tess Roby</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Mr. James Barth - The End</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Dry Cleaning - Anna Calls From The Arctic</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Clams Casino - Gorilla</span></li>
+          <li><span class="track-num">6</span><span class="track-title">POiSON GiRL FRiEND - comme rêve sans trêve</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Das Ding - Dream Decay</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Hailu Mergia - Tizita</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Max Roach - Effi</span></li>
+          <li><span class="track-num">10</span><span class="track-title">The Magnetic Fields - The Dreaming Moon</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Juan Martín - The Diver</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Décima Víctima - Detrás De La Mirada</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Club Nouveau - Share Your Love</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Roxy Music - Dance Away</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Hyas - TN Emeraude ft. Sevenbeatz</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Sly Robbie - Peenie Wally</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Desire - Under Your Spell</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Phil Kieran - Snakes Crawl (East Village Mix)</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Red Axes - Sound Text XoX</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Nujabes - Imaginary Folklore</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Ultraflex - Relax</span></li>
+          <li><span class="track-num">22</span><span class="track-title">DECIUS - Show Me No Tears (Extended Version)</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Ultraflex - Relax</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Toumba - Istibtan</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Unity - Future Sound of London</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Ride - Vapour Trail</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Pauline Anna Strom - Morning Splendor</span></li>
+          <li><span class="track-num">28</span><span class="track-title">ISAO TOMITA - SNOWFLAKES ARE DANCING</span></li>
+          <li><span class="track-num">29</span><span class="track-title">Sandy B - Let Me In</span></li>
+          <li><span class="track-num">30</span><span class="track-title">Dim Garden - Visions Of Love (Legowelt Remix)</span></li>
+          <li><span class="track-num">31</span><span class="track-title">Gary Gritness - Sodium Sulfur</span></li>
+          <li><span class="track-num">32</span><span class="track-title">Bambounou - Data</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ 2022 ════════════════ -->
+  <section class="year-section">
+    <h2 class="year-heading">2022</h2>
+    <div class="playlist-grid">
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5yk4sZMUyd15HJrWJxn862Iy"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">Fall 2022 — Part 3</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Erast - Txili</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Sean Coy & Deckstar - What Can I do</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Brian Ice - Talking To The Night</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Cocteau Twins - Know Who You Are At Every Age</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Fun Boy Three - best of luck mate</span></li>
+          <li><span class="track-num">6</span><span class="track-title">anthony shake shakir - plugged in</span></li>
+          <li><span class="track-num">7</span><span class="track-title">PiL - The Order of Death</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Coil - Love's Secret Domain</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Bitty McLean - Walk Away From Love</span></li>
+          <li><span class="track-num">10</span><span class="track-title">BARRY BIGGS - WIDE AWAKE IN A DREAM</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Love & Unity - Just Don't Care</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Pia Fraus - 400 & 57</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Release - Sunkissed</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ynzYeZ8GTgGPcBeuCdeCCeW"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">Fall 2022 — Part 2</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Shaquille O'Neal - Strait Playin' (Superman Remix)</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Cabaret Voltaire - The Heat</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Cabaret Voltaire - The Root</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Massive Attack - Protection (Underdog's Angel Dust Mix)</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Sam Gendel - Tate-waku</span></li>
+          <li><span class="track-num">6</span><span class="track-title">DΛRKNΣSS - MAID TAPES V.1</span></li>
+          <li><span class="track-num">7</span><span class="track-title">DΛRKNΣSS - magician whisper</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Release - Maura Jean</span></li>
+          <li><span class="track-num">9</span><span class="track-title">WHITE BGM - LOVEファースト</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Grupo Soñador - La Cumbia de la Cerveza</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Smith & Mighty - The Dark, Dark House</span></li>
+          <li><span class="track-num">12</span><span class="track-title">MarijuanaXO x Joe Pablo - My Brother</span></li>
+          <li><span class="track-num">13</span><span class="track-title">LUCHO GAVILANES - La Danza Del Mono</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Jungle - Good Times / Problemz</span></li>
+          <li><span class="track-num">15</span><span class="track-title">tobi lou - Game Ova Krs. Remix</span></li>
+          <li><span class="track-num">16</span><span class="track-title">SiR - Mood ft. Zacari</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Caypyrynha - The key (Bahia 79)</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5yn1tb9ee9qp8fyr2o2iyG7s"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">Fall 2022</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Phil Gerus - She Is Wearing Her Black Boots Again</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Sebastián Gómez - Yolanda</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Special Occasion - Flyin' To Santa Barbara</span></li>
+          <li><span class="track-num">4</span><span class="track-title">The Product aka Budwyser & Darace - Darling Darling Baby</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Rockford Files - You Gotta Know</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Maxwell - Ascension</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Toumani Diabaté - Jarabi</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Provoker - Dark Angel</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Miles Davis - Fran-Dance</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Kelela - Washed Away</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Androo - 2000 & Universe</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Marvin Gardens - My Body & Soul (Remix)</span></li>
+          <li><span class="track-num">13</span><span class="track-title">TC 1991 - Fratty Energy Version</span></li>
+          <li><span class="track-num">14</span><span class="track-title">TECHNO BERT - NEUE DIMENSIONEN</span></li>
+          <li><span class="track-num">15</span><span class="track-title">P. Lion - Burn In His Hands</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Blue Ocean - Everybody</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Living House - To Talk</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Nitelite Cityrama - Runnin' So Hard</span></li>
+          <li><span class="track-num">19</span><span class="track-title">50 Hertz - Get Up</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Klaus - Break Not Down</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Essential Chrome - Mika</span></li>
+          <li><span class="track-num">22</span><span class="track-title">SHADES OF RHYTHM - SWEET SENSATION</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Unlimited Nation - Move Your Body</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Pet Shop Boys - HEART 2022</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Mentalinstrum - Trust Yourself</span></li>
+          <li><span class="track-num">26</span><span class="track-title">K London Posse - Come Alive</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Lisa Stansfield - Set Your Loving Free</span></li>
+          <li><span class="track-num">28</span><span class="track-title">Lush - Love At First Sight</span></li>
+          <li><span class="track-num">29</span><span class="track-title">User2222 - Tending To the Earthworms</span></li>
+          <li><span class="track-num">30</span><span class="track-title">Intense - On My Mind</span></li>
+          <li><span class="track-num">31</span><span class="track-title">oqbqbo & Scandinavian Star - Airdrops</span></li>
+          <li><span class="track-num">32</span><span class="track-title">Niko Tzoukmanis - Floating Free</span></li>
+          <li><span class="track-num">33</span><span class="track-title">nthng - Looking Outside</span></li>
+          <li><span class="track-num">34</span><span class="track-title">Pet Shop Boys - Why Don't We Live Together?</span></li>
+          <li><span class="track-num">35</span><span class="track-title">Pet Shop Boys - Why Don't We Live Together?</span></li>
+          <li><span class="track-num">36</span><span class="track-title">Pet Shop Boys - Left To My Own Devices</span></li>
+          <li><span class="track-num">37</span><span class="track-title">Pet Shop Boys - Fluorescent</span></li>
+          <li><span class="track-num">38</span><span class="track-title">Pet Shop Boys - This Must Be The Place</span></li>
+          <li><span class="track-num">39</span><span class="track-title">duster - Cooking</span></li>
+          <li><span class="track-num">40</span><span class="track-title">Pet Shop Boys - Heart</span></li>
+          <li><span class="track-num">41</span><span class="track-title">Pet Shop Boys - Domino Dancing</span></li>
+          <li><span class="track-num">42</span><span class="track-title">Pet Shop Boys - In The Club Or In The Queue</span></li>
+          <li><span class="track-num">43</span><span class="track-title">Frank Zappa - Watermelon In Easter Hay</span></li>
+          <li><span class="track-num">44</span><span class="track-title">Dave Saved - No name about cities and red lips</span></li>
+          <li><span class="track-num">45</span><span class="track-title">Bowery Electric - Next To Nothing</span></li>
+          <li><span class="track-num">46</span><span class="track-title">LUTTO LENTO - STRANGEST DREAM ABOUT U</span></li>
+          <li><span class="track-num">47</span><span class="track-title">Durutti Column - Futur Perfect</span></li>
+          <li><span class="track-num">48</span><span class="track-title">Lord Tusk - Tell Me feat. Tyson</span></li>
+          <li><span class="track-num">49</span><span class="track-title">Ivy - Disappointed</span></li>
+          <li><span class="track-num">50</span><span class="track-title">Jadakiss - By your side</span></li>
+          <li><span class="track-num">51</span><span class="track-title">duster - Heading for the Door</span></li>
+          <li><span class="track-num">52</span><span class="track-title">throwing muses - honeychain</span></li>
+          <li><span class="track-num">53</span><span class="track-title">SQUAREPUSHER - I wish you could talk</span></li>
+          <li><span class="track-num">54</span><span class="track-title">Pet Shop Boys - So Hard (David Morales Mix)</span></li>
+          <li><span class="track-num">55</span><span class="track-title">Itesa - Uv EP</span></li>
+          <li><span class="track-num">56</span><span class="track-title">TSVI & Loraine James - Trust</span></li>
+          <li><span class="track-num">57</span><span class="track-title">Ray Barbee - A Word Aptly Spoken</span></li>
+          <li><span class="track-num">58</span><span class="track-title">Antonio Williams / Kerry McCoy - Changes</span></li>
+          <li><span class="track-num">59</span><span class="track-title">Poison Girl Friend - Fact 2</span></li>
+          <li><span class="track-num">60</span><span class="track-title">Konk - Your Life Extended</span></li>
+          <li><span class="track-num">61</span><span class="track-title">Metro Area - Caught Up</span></li>
+          <li><span class="track-num">62</span><span class="track-title">Ten City - Deep Kiss</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ynqnA8hXo89tbdMzh8X_s5N"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">Summer 2022</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Victor Romero Evans - At the club</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Baby Ford - Move On</span></li>
+          <li><span class="track-num">3</span><span class="track-title">BigBuckz Von X KMURDA DA STEPPA - TALK MY SHIT REMIX</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Ryuichi Sakamoto - Bamboo Houses (Remix)</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Thomas Dolby - Field Work</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Celestial - HAT FULL OF RAIN</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Andrew Wasylyk - Last Sunbeams of Childhood</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Don Brown - Don't Lose Your Love</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Tommy Mandel - Friend</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Mystikal - Neck Of Da Woods instrumental</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Self Esteem - I Do This All The Time</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Suzy Sheer - Blissed</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Young American Primitive - Sunrise</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Baby Keem & Travis Scott - durag activity</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Soda Inc - Cross The Ocean</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Freemasons - Love On My Mind</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Dirty Old Ann - Turn Me On</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Lee Cabrera feat. Mim - I Watch You</span></li>
+          <li><span class="track-num">19</span><span class="track-title">WEISS - Feel My Needs</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Tonka feat Lara McAllen - Get Back</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Aaron Smith Feat. Luvli - Dancin'</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Unknown T - WW2</span></li>
+          <li><span class="track-num">23</span><span class="track-title">JNR CHOI - TO THE MOON (Gunna Remix)</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Future - 712PM</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Future - I'M DAT N****</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Future - KEEP IT BURNIN</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Future - FOR A NUT</span></li>
+          <li><span class="track-num">28</span><span class="track-title">Future - PUFFIN ON ZOOTIEZ</span></li>
+          <li><span class="track-num">29</span><span class="track-title">Future - GOLD STACKS</span></li>
+          <li><span class="track-num">30</span><span class="track-title">Future - WAIT FOR U</span></li>
+          <li><span class="track-num">31</span><span class="track-title">Future - LOVE YOU BETTER</span></li>
+          <li><span class="track-num">32</span><span class="track-title">Future - MASSAGING ME</span></li>
+          <li><span class="track-num">33</span><span class="track-title">Future - CHICKENS</span></li>
+          <li><span class="track-num">34</span><span class="track-title">Future - WE JUS WANNA GET HIGH</span></li>
+          <li><span class="track-num">35</span><span class="track-title">Future - VOODOO</span></li>
+          <li><span class="track-num">36</span><span class="track-title">Future - HOLY GHOST</span></li>
+          <li><span class="track-num">37</span><span class="track-title">Future - THE WAY THINGS GOING</span></li>
+          <li><span class="track-num">38</span><span class="track-title">Future - I'M ON ONE</span></li>
+          <li><span class="track-num">39</span><span class="track-title">Future - BACK TO THE BASICS</span></li>
+          <li><span class="track-num">40</span><span class="track-title">Future - CHICKENS feat. EST Gee</span></li>
+          <li><span class="track-num">41</span><span class="track-title">One Dove - White Love (Psychic Masturbation)</span></li>
+          <li><span class="track-num">42</span><span class="track-title">Captain Sensible - Wot</span></li>
+          <li><span class="track-num">43</span><span class="track-title">Russ Millions x Buni x YV - Reggae & Calypso</span></li>
+          <li><span class="track-num">44</span><span class="track-title">Baltra - Tears Drop</span></li>
+          <li><span class="track-num">45</span><span class="track-title">Die Wilde Jagd - Himmelfahrten</span></li>
+          <li><span class="track-num">46</span><span class="track-title">Ferro Gaita - Moças De Mangui</span></li>
+          <li><span class="track-num">47</span><span class="track-title">Ferro Gaita</span></li>
+          <li><span class="track-num">48</span><span class="track-title">Benedikt Frey - JATIBE - Entspannung</span></li>
+          <li><span class="track-num">49</span><span class="track-title">Alzo - Lover Man</span></li>
+          <li><span class="track-num">50</span><span class="track-title">Whitney Houston - I'm Your Baby Tonight (Jet Boot Jack Remix)</span></li>
+          <li><span class="track-num">51</span><span class="track-title">Janet Jackson - Someone To Call My Lover</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ynm6ezv_eNLl61VgwuPjEIL"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">Spring 2022</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Bowery Electric - Beat (1996) Full Album</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Kool & Klean - Reality</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Q-Mark TpZee - Paris feat. Afriikan Papi</span></li>
+          <li><span class="track-num">4</span><span class="track-title">DJ Krush - Big City Lover</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Merle - Mimi Likes 2 Dance</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Long Island Sound - First Contact</span></li>
+          <li><span class="track-num">7</span><span class="track-title">D.J. PROFESSOR & FRANCESCO ZAPPALA - We Gotta Do It</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Primitive Radio Gods - Standing Outside A Broken Phone Booth</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Hook Ups - Glaze</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Mr. Dibbs - Turntable Scientifics Mixtape</span></li>
+          <li><span class="track-num">11</span><span class="track-title">DJ Spanish Fly - Cement Shoes (Screwed)</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Madonna - Nothing Really Matters (Kruder & Dofmeister Mix)</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Barbara Tucker - I Get Lifted</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Roger Doyle - Spring Is Coming With a Strawberry</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Blue Chemise - Daughters Of Time</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Loose Ends - What Goes Around (Slowed Down)</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Loose Ends - Nights Of Pleasure</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Najee - Betcha Don't Know</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Professor Creepshow - Memory Card 2</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Yung Mal & Lil Quill - Fortnite</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Bowery Electric - Fear of Flying</span></li>
+          <li><span class="track-num">22</span><span class="track-title">heat prod. loeifcial</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Hamied El Shaeri - Ouda</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Il Guardiano del Faro - Disco Divina</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Kayroy - Cutoff Freak (Johannes Albert Acid Dub)</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Kayroy - Some Kind Of Electric</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Dean Blunt - Available</span></li>
+          <li><span class="track-num">28</span><span class="track-title">Odyssey - Native New Yorker</span></li>
+          <li><span class="track-num">29</span><span class="track-title">NYC Peech Boys - Come-On Come-On</span></li>
+          <li><span class="track-num">30</span><span class="track-title">Myth Syzer ft. Ichon - Coco Love</span></li>
+          <li><span class="track-num">31</span><span class="track-title">George Michael - Cowboys and Angels</span></li>
+          <li><span class="track-num">32</span><span class="track-title">Zuukou Mayzie - Pussy Wagon</span></li>
+          <li><span class="track-num">33</span><span class="track-title">Hamza - Validé</span></li>
+          <li><span class="track-num">34</span><span class="track-title">The Rosaries - Leaving</span></li>
+          <li><span class="track-num">35</span><span class="track-title">Vigro Deep - Africa Rise</span></li>
+          <li><span class="track-num">36</span><span class="track-title">Niko Tzoukmanis - Blue Valentine</span></li>
+          <li><span class="track-num">37</span><span class="track-title">Louf - Formation (Otik Remix)</span></li>
+          <li><span class="track-num">38</span><span class="track-title">Unknown T - WW2</span></li>
+          <li><span class="track-num">39</span><span class="track-title">France Gall - Ella elle l'a (Remix Angleterre)</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ylWN6uVay1UGOtBBbxnNEH_"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">Winter 2022</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Q-Mark TpZee - Paris feat. Afriikan Papi</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Greg Henderson - Dreamin' (Louie Vega Edit)</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Greg Henderson - Dreamin'</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Echomen - Spirit</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Breeder - New York FM (Van Bellen Remix)</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Sweet Female Attitude - Flowers (Sunship Edit)</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Carlos Casas - Talipi</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Freak De L'Afrique - Yebo ft. Lindi</span></li>
+          <li><span class="track-num">9</span><span class="track-title">The MFA - The Difference It Makes (Superpitcher Remix)</span></li>
+          <li><span class="track-num">10</span><span class="track-title">DJ Koze - Brutalga Square</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Superpitcher - Tomorrow</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Deltawerk - Corridor</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Michael Mayer - The Horn Conspiracy</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Gil Scott-Heron - Angola Louisiana</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Carlton - Cool With Nature</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Madonna - The Power Of Goodbye (William Orbit Instrumental)</span></li>
+          <li><span class="track-num">17</span><span class="track-title">2trancentral - Rollercoaster mix</span></li>
+          <li><span class="track-num">18</span><span class="track-title">A Winged Victory For The Sullen - The Celestial City</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Aphex Twin - aisatsana</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Firefall - Just Remember I Love You</span></li>
+          <li><span class="track-num">21</span><span class="track-title">h hunt - Having a Bath</span></li>
+          <li><span class="track-num">22</span><span class="track-title">GRM Daily - Grumpy Sho Sho - Ronan Keating</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Young Dolph Key Glock - What u see is what u get</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Strandz - 4Eva Timeless</span></li>
+          <li><span class="track-num">25</span><span class="track-title">2trancentral - Yantra - The Birth Of Stars</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Ingrid Chavez - Heaven Must Be Near</span></li>
+          <li><span class="track-num">27</span><span class="track-title">T-World - Anthem (part one)</span></li>
+          <li><span class="track-num">28</span><span class="track-title">myke420247 - 心地よい CINEMA 夢</span></li>
+          <li><span class="track-num">29</span><span class="track-title">DJ Assault - U Ain't All That</span></li>
+          <li><span class="track-num">30</span><span class="track-title">Baby Keem - TOP RAMEN</span></li>
+          <li><span class="track-num">31</span><span class="track-title">myke420247 - Haircuts For Men keygen</span></li>
+          <li><span class="track-num">32</span><span class="track-title">M'Way - Money Right</span></li>
+          <li><span class="track-num">33</span><span class="track-title">MC Miker G & DJ Sven - Holiday Rap</span></li>
+          <li><span class="track-num">34</span><span class="track-title">Mos Def - May December</span></li>
+          <li><span class="track-num">35</span><span class="track-title">Zomby - As Darkness Falls</span></li>
+          <li><span class="track-num">36</span><span class="track-title">Laraaji - Being Here</span></li>
+          <li><span class="track-num">37</span><span class="track-title">M-AGE - BLIND VENUS (Remixed by CASPAR POUND)</span></li>
+          <li><span class="track-num">38</span><span class="track-title">The Durutti Column - Spanish Reggae</span></li>
+          <li><span class="track-num">39</span><span class="track-title">DJ Spooky - Dialectical Transformation I</span></li>
+          <li><span class="track-num">40</span><span class="track-title">Big Ang - U Can't Change Me</span></li>
+          <li><span class="track-num">41</span><span class="track-title">Talk Talk - Life's What You Make It</span></li>
+          <li><span class="track-num">42</span><span class="track-title">Rhode & Brown - No Anthems</span></li>
+          <li><span class="track-num">43</span><span class="track-title">City Girls - Where The Bag At</span></li>
+          <li><span class="track-num">44</span><span class="track-title">The Cure - If Only Tonight We Could Sleep</span></li>
+          <li><span class="track-num">45</span><span class="track-title">The Cure - Grinding Halt</span></li>
+          <li><span class="track-num">46</span><span class="track-title">T.I. ft. Young Jeezy - Top Back (Remix)</span></li>
+          <li><span class="track-num">47</span><span class="track-title">International Music System - Mojave</span></li>
+          <li><span class="track-num">48</span><span class="track-title">haircuts for men - there are people you will never see again</span></li>
+          <li><span class="track-num">49</span><span class="track-title">Time Cow & RTKal - Elephant Man</span></li>
+          <li><span class="track-num">50</span><span class="track-title">Gavsborg - Making Love to Volca</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ 2021 ════════════════ -->
+  <section class="year-section">
+    <h2 class="year-heading">2021</h2>
+    <div class="playlist-grid">
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ykwkdz2fXDB3pHPdIMleZA7"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">Fall 2021</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">O Zone - Dragostea din tei</span></li>
+          <li><span class="track-num">2</span><span class="track-title">The Creatures - New York</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Jamie Principle - Waiting on My Angel (Dub Mix)</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Expansives - Life with you (instrumental 1983)</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Jerome Isma-Ae - Underwater Love</span></li>
+          <li><span class="track-num">6</span><span class="track-title">FM Skyline - Illuminations</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Fake Fever - Surrogate</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ykU10nhyadQPPBBJKOCAfNV"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">Summer 2021</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Weirdoz - Everyday (Instrumental)</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Intrepid Stylez - Eyes On My Enemies (Instrumental)</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Invisible Inc. - Pure (Instrumental)</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Invisible Inc. - Pure</span></li>
+          <li><span class="track-num">5</span><span class="track-title">90's Underground Hip Hop - Rare Tracks</span></li>
+          <li><span class="track-num">6</span><span class="track-title">SINISTAR VOICEZ - DO OR DIE</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Dirty Able - Shorty</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Heavy Sedation - What's Da Deal</span></li>
+          <li><span class="track-num">9</span><span class="track-title">ZOID LAND - midnight sun</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Zafer Dilek - Oyun Havaları</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Alain Del Corazon - Only Love Can Make Me</span></li>
+          <li><span class="track-num">12</span><span class="track-title">COCHISE - Tell Em</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Claude Young - As You Like It</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Free For Profit $uicideboy$ Type Beat - Whispers</span></li>
+          <li><span class="track-num">15</span><span class="track-title">noya ayzha nyree instrumental (Slowed+Reverbed)</span></li>
+          <li><span class="track-num">16</span><span class="track-title">SUPER SMASH BROS BRAWL DRILL REMIX</span></li>
+          <li><span class="track-num">17</span><span class="track-title">BAMBOLEO x Narcos (Nalo Remix) - Instrumental</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Bamboleo x Narcos (Nalo Remix)</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Bamboleo x Narcos</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Trippie Redd - Miss The Rage Feat. Playboi Carti</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Derrick Carter - Illusions Part 1</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Starflight - Dancer</span></li>
+          <li><span class="track-num">23</span><span class="track-title">CAPE CORAL - Morning Fit</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Yo voy (Post-punk version) - Zion y Lennox</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Mark Farina - Playground Moves</span></li>
+          <li><span class="track-num">26</span><span class="track-title">goreshit - Fine Night</span></li>
+          <li><span class="track-num">27</span><span class="track-title">goreshit - Dreamer</span></li>
+          <li><span class="track-num">28</span><span class="track-title">goreshit - Lonely</span></li>
+          <li><span class="track-num">29</span><span class="track-title">goreshit - Hold My Hand</span></li>
+          <li><span class="track-num">30</span><span class="track-title">goreshit - Unnatural</span></li>
+          <li><span class="track-num">31</span><span class="track-title">Miguel Migs - Petalpushing</span></li>
+          <li><span class="track-num">32</span><span class="track-title">Miguel Migs - Petalpushing</span></li>
+          <li><span class="track-num">33</span><span class="track-title">Miguel Migs - Nite:Life 03</span></li>
+          <li><span class="track-num">34</span><span class="track-title">Gipsy Kings - Bamboleo</span></li>
+          <li><span class="track-num">35</span><span class="track-title">Gipsy Kings - Tu Quieres Volver</span></li>
+          <li><span class="track-num">36</span><span class="track-title">Gipsy Kings - Moorea</span></li>
+          <li><span class="track-num">37</span><span class="track-title">Gipsy Kings - Bem Bem Maria</span></li>
+          <li><span class="track-num">38</span><span class="track-title">Gipsy Kings - Un Amor</span></li>
+          <li><span class="track-num">39</span><span class="track-title">Gipsy Kings - Inspiration</span></li>
+          <li><span class="track-num">40</span><span class="track-title">Gipsy Kings - A Mi Manera</span></li>
+          <li><span class="track-num">41</span><span class="track-title">Gipsy Kings - Djobi Djoba</span></li>
+          <li><span class="track-num">42</span><span class="track-title">Gipsy Kings - Faena</span></li>
+          <li><span class="track-num">43</span><span class="track-title">Gipsy Kings - Quiero Saber</span></li>
+          <li><span class="track-num">44</span><span class="track-title">Gipsy Kings - Amor Amor</span></li>
+          <li><span class="track-num">45</span><span class="track-title">Gipsy Kings - Duende</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5yl_rh3RV4hi8mbZ49VfK2aH"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">Spring 2021</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Laserdance - Humanoid Invasion (7'' Version)</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Laserdance - Shotgun (Into The Night) (Remix)</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Laserdance - Goody's Return</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Laserdance - Power Run (Swedish Remix 7'' Version)</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Laserdance - Future Generation</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Laserdance - Around The Planet</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Laserdance - Cosmo Tron (Remix)</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Laserdance - Fear</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Laserdance - Endless Dream</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Laserdance - The Challenge (Remix)</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Laserdance - Enemy On Earth (Vocoder Mix)</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Laserdance - Mars Invaders</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Laserdance - Technoid (Radio Version)</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Laserdance - Fire On Earth</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Laserdance - Lazer Dance (Space Version)</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Laserdance - Humanoid Invasion (Space Mix)</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Laserdance - Power Run (Swedish Remix)</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Laserdance - The Challenge (Space Version)</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Laserdance - Humanoid Invasion (Dance Mix)</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Laserdance - Goody's Return (Maxi Version)</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Laserdance - Shotgun (Into The Night) (Spacemix)</span></li>
+          <li><span class="track-num">22</span><span class="track-title">Laserdance - Technoid (Space Version)</span></li>
+          <li><span class="track-num">23</span><span class="track-title">Laserdance - Fear (Remix)</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Laserdance - Battle Cry (Space Mix)</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Laserdance - Laserdance (Remix '88)</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Laserdance - Humanoid Invasion (Space Mix)</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Laserdance - Megamix Vol. 1</span></li>
+          <li><span class="track-num">28</span><span class="track-title">HEAVY SYSTEMS Inc. - ｃｙｂｅｒｎｅｔ'94</span></li>
+          <li><span class="track-num">29</span><span class="track-title">DJ_Clock - Union Dance</span></li>
+          <li><span class="track-num">30</span><span class="track-title">Scotch - Disco Band</span></li>
+          <li><span class="track-num">31</span><span class="track-title">Hong Kong Express - This</span></li>
+          <li><span class="track-num">32</span><span class="track-title">Hong Kong Express - 6 AM ft. ＶＩＲＴＵＥ</span></li>
+          <li><span class="track-num">33</span><span class="track-title">K.B.Caps - Do You Really Need Me '98</span></li>
+          <li><span class="track-num">34</span><span class="track-title">RoboMatic '86 - The Italo NONSTOP megamix</span></li>
+          <li><span class="track-num">35</span><span class="track-title">Miko Mission - How Old Are You</span></li>
+          <li><span class="track-num">36</span><span class="track-title">Hong Kong Express - 2047</span></li>
+          <li><span class="track-num">37</span><span class="track-title">Golden Edition (Vaporwave Mix)</span></li>
+          <li><span class="track-num">38</span><span class="track-title">Moodymann - Lyk U Use 2</span></li>
+          <li><span class="track-num">39</span><span class="track-title">Zadig the Jasp - 1988</span></li>
+          <li><span class="track-num">40</span><span class="track-title">$tinkworx - Coelacanth</span></li>
+          <li><span class="track-num">41</span><span class="track-title">MR. FLAGIO - TAKE A CHANCE</span></li>
+          <li><span class="track-num">42</span><span class="track-title">Roy - Shooting Star (Bonus Beat)</span></li>
+          <li><span class="track-num">43</span><span class="track-title">Doctor's Cat - Feel the Drive (House Drive Mix)</span></li>
+          <li><span class="track-num">44</span><span class="track-title">Doctor's Cat - Feel the Drive (Vocal Extended)</span></li>
+          <li><span class="track-num">45</span><span class="track-title">Roy - Shooting Star (Dub Version)</span></li>
+          <li><span class="track-num">46</span><span class="track-title">RAF - Self Control</span></li>
+          <li><span class="track-num">47</span><span class="track-title">Baltimora - Tarzan Boy</span></li>
+          <li><span class="track-num">48</span><span class="track-title">The Sundays - Goodbye</span></li>
+          <li><span class="track-num">49</span><span class="track-title">haircuts for men - RIVER</span></li>
+          <li><span class="track-num">50</span><span class="track-title">It's 1993 and you're in a hotel pool (Vaporwave Mix)</span></li>
+          <li><span class="track-num">51</span><span class="track-title">Slim Gaillard - Potato Chips</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5yn9ED2XRHHrv1KxHrPluzA1"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">Winter 2021</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">The Shamen - pro»gen (Land Of Oz Mix by Paul Oakenfold)</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Danny Tenaglia - Tribal House Session - 2001</span></li>
+          <li><span class="track-num">3</span><span class="track-title">Eberhard Schoener - Why Don't You Answer</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Gipsy Kings - Medley: Bamboleo Volare Djobi Djoba</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Susumu Yokota aka Prism - Metronome Melody</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Stevia aka Susumu Yokota - Fruits of the Room</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Ebi aka Susumu Yokota - Ten</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Susumu Yokota - Over Head</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Susumu Yokota - Cat Mouse and Me</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Susumu Yokota 1998</span></li>
+          <li><span class="track-num">11</span><span class="track-title">Susumu Yokota - Sound of Sky</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Prism aka Susumu Yokota - Fallen Angel</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Susumu Yokota - Unreleased Works 1995</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Susumu Yokota - Symbol</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Susumu Yokota - The Boy and the Tree</span></li>
+          <li><span class="track-num">16</span><span class="track-title">Stevia aka Susumu Yokota - Greenpeace</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Susumu Yokota - Dreamer</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Anima Mundi - Anima:Beat</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Susumu Yokota - Laputa</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Ringo aka Susumu Yokota - Plantation</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Susumu Yokota - Akafuji single</span></li>
+          <li><span class="track-num">22</span><span class="track-title">S U P E R F L A T - Midnight Ads</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ 2020 ════════════════ -->
+  <section class="year-section">
+    <h2 class="year-heading">2020</h2>
+    <div class="playlist-grid">
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ynjWAmNJ9rtvTGjS8sRdEj8"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">Fall 2020</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Prefab Sprout - All the World Loves Lovers</span></li>
+          <li><span class="track-num">2</span><span class="track-title">The Sundays - Goodbye</span></li>
+          <li><span class="track-num">3</span><span class="track-title">A Flock Of Seagulls - Space Age Love Song</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Blue Gas - Shadows From Nowhere</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Rick Cuevas - Birds</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Bandolero - Reves Noirs</span></li>
+          <li><span class="track-num">7</span><span class="track-title">Pejzaz - Uwazaj Jak Tanczysz</span></li>
+          <li><span class="track-num">8</span><span class="track-title">THE APOSTLES - MERCY MERCY ME</span></li>
+          <li><span class="track-num">9</span><span class="track-title">Penguin Cafe Orchestra - Perpetuum Mobile</span></li>
+          <li><span class="track-num">10</span><span class="track-title">Susumu Yokota - Tobiume</span></li>
+          <li><span class="track-num">11</span><span class="track-title">GusGus - Believe</span></li>
+          <li><span class="track-num">12</span><span class="track-title">Lamb - lusty</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Valerie M & Lee Viner - Chillout</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Pejzaż - Ostatni Dzień Lata</span></li>
+          <li><span class="track-num">15</span><span class="track-title">Kylie Minogue - Slow (Extended Mix)</span></li>
+          <li><span class="track-num">16</span><span class="track-title">wosX - Kokaine</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Adam F ft. Tracey Thorn - The Tree Knows Everything</span></li>
+          <li><span class="track-num">18</span><span class="track-title">Bruised Skies - Fix Me</span></li>
+          <li><span class="track-num">19</span><span class="track-title">Yoshimi X Ninomiya Tatsuki - 優しい時間</span></li>
+          <li><span class="track-num">20</span><span class="track-title">Cube Underlord - MERCY 天</span></li>
+          <li><span class="track-num">21</span><span class="track-title">Sabrine Galera - Wishing</span></li>
+          <li><span class="track-num">22</span><span class="track-title">B52's - Mesopotamia (Extended dance re-edit)</span></li>
+          <li><span class="track-num">23</span><span class="track-title">B-52s - Mesopotamia (Danny Krivit Edit)</span></li>
+          <li><span class="track-num">24</span><span class="track-title">Abstract Truth ft Monique Bingham - We Had A Thing</span></li>
+          <li><span class="track-num">25</span><span class="track-title">Tyree - Acid Over (Piano Mix)</span></li>
+          <li><span class="track-num">26</span><span class="track-title">Moodyman - Live on Tape 2006</span></li>
+          <li><span class="track-num">27</span><span class="track-title">Prefab Sprout - When Love Breaks Down</span></li>
+          <li><span class="track-num">28</span><span class="track-title">Moodymann - Meanwhile Back At Home</span></li>
+        </ol>
+      </div>
+
+      <div class="playlist-card">
+        <div class="player-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/videoseries?list=PLs2RfrJzU5ylmve5ReyIzMdJi8I8fVd96"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="card-label">Winter 2020</div>
+        <ol class="tracklist">
+          <li><span class="track-num">1</span><span class="track-title">Vapor Memory - LIVEWIRE GALA II</span></li>
+          <li><span class="track-num">2</span><span class="track-title">Tropical Interface - Saturation</span></li>
+          <li><span class="track-num">3</span><span class="track-title">goreshit - unnatural</span></li>
+          <li><span class="track-num">4</span><span class="track-title">Jordan 10-E - The Grand Epic - 1998 Mixtape</span></li>
+          <li><span class="track-num">5</span><span class="track-title">Vektroid - Terminal</span></li>
+          <li><span class="track-num">6</span><span class="track-title">Dr. Nakano - Snow In Tokyo</span></li>
+          <li><span class="track-num">7</span><span class="track-title">虹猫 - Flower</span></li>
+          <li><span class="track-num">8</span><span class="track-title">Derrick Carter - Live @ Red Jacket 2000</span></li>
+          <li><span class="track-num">9</span><span class="track-title">AfterImage - Love Comes Slowly</span></li>
+          <li><span class="track-num">10</span><span class="track-title">chris††† - he's dead inside</span></li>
+          <li><span class="track-num">11</span><span class="track-title">chris††† - frasierwave</span></li>
+          <li><span class="track-num">12</span><span class="track-title">ESPRIT 空想 George Clanton - Slow 2018</span></li>
+          <li><span class="track-num">13</span><span class="track-title">Kevin Saunderson - Tranzister (Extended Mix)</span></li>
+          <li><span class="track-num">14</span><span class="track-title">Separate Minds - Scattered Thoughts</span></li>
+          <li><span class="track-num">15</span><span class="track-title">CosmosZombie - Wasted Nights</span></li>
+          <li><span class="track-num">16</span><span class="track-title">ℍUM♥NIGHTMARE - Ｓｔｅｐ Ｉｎ Ｍｙ Ｗｏｒｌｄ</span></li>
+          <li><span class="track-num">17</span><span class="track-title">Captain Sensible - Glad It's All Over</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Bobby's Cosmopolitan Lifestyle &nbsp;·&nbsp; Updated monthly</p>
+</footer>
+
+</body>
+</html>
