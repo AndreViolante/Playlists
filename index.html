@@ -255,16 +255,10 @@ async function fetchPlaylistsData() {
   }
 }
 
-async function getYouTubeThumbnail(playlistUrl) {
-  try {
-    const oembedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(playlistUrl)}&format=json`;
-    const response = await fetch(oembedUrl);
-    const data = await response.json();
-    return data.thumbnail_url;
-  } catch (error) {
-    console.error('Error fetching oEmbed data:', error);
-    return null;
-  }
+function getYouTubeThumbnail(thumbnail) {
+  // Use the thumbnail URL from playlists.json
+  // Format: https://i.ytimg.com/vi/{VIDEO_ID}/hqdefault.jpg
+  return thumbnail || null;
 }
 
 function groupPlaylistsByYear(playlists) {
@@ -296,12 +290,11 @@ function createPlaylistCard(playlist) {
     <div class="playlist-card">
       <a href="${playlist.url}" target="_blank" class="thumb-link" title="Open playlist on YouTube">
         <div class="thumb-wrap">
-          <img src="" 
+          <img src="${playlist.thumbnail}" 
                alt="${playlist.label}"
                referrerpolicy="no-referrer"
                onerror="this.parentElement.classList.add('no-img')"
-               loading="lazy"
-               data-playlist-url="${playlist.url}">
+               loading="lazy">
           <div class="play-btn">&#9654;</div>
         </div>
       </a>
@@ -336,18 +329,6 @@ async function renderSite() {
   mainContent.innerHTML = groupedByYear
     .map(({ year, playlists }) => createYearSection(year, playlists))
     .join('');
-
-  // Fetch thumbnails for all playlist images
-  const images = document.querySelectorAll('img[data-playlist-url]');
-  for (const img of images) {
-    const url = img.getAttribute('data-playlist-url');
-    const thumbnail = await getYouTubeThumbnail(url);
-    if (thumbnail) {
-      img.src = thumbnail;
-    } else {
-      img.parentElement.classList.add('no-img');
-    }
-  }
 }
 
 // Render the site when DOM is ready
