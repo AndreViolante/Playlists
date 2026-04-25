@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant of Music</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #fff;
+    color: #111;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    padding: 48px 32px 80px;
+  }
+
+  header {
+    margin-bottom: 40px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: #111;
+  }
+
+  .count {
+    font-size: 0.8rem;
+    color: #aaa;
+    font-weight: 400;
+  }
+
+  /* Year labels */
+  .year-marker {
+    grid-column: 1 / -1;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #aaa;
+    padding: 24px 0 8px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 4px;
+  }
+
+  .year-marker:first-child {
+    padding-top: 0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 24px;
+    max-width: 960px;
+  }
+
+  .card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .card:hover .thumb-wrap {
+    opacity: 0.88;
+  }
+
+  .card:hover .title {
+    color: #555;
+  }
+
+  .thumb-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: #f0f0f0;
+    overflow: hidden;
+    border-radius: 2px;
+    transition: opacity 0.15s;
+  }
+
+  .thumb-wrap img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    transition: opacity 0.2s;
+  }
+
+  .thumb-wrap img.loaded {
+    display: block;
+  }
+
+  .thumb-placeholder {
+    position: absolute;
+    inset: 0;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .thumb-placeholder::after {
+    content: '';
+    width: 28px;
+    height: 28px;
+    border: 2px solid #ddd;
+    border-top-color: #bbb;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .thumb-placeholder.done::after {
+    display: none;
+  }
+
+  .meta {
+    padding: 8px 0 0;
+  }
+
+  .year-tag {
+    font-size: 0.62rem;
+    color: #bbb;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #111;
+    transition: color 0.15s;
+  }
+
+  @media (max-width: 700px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 420px) {
+    .grid { grid-template-columns: 1fr; }
+    body { padding: 32px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Restaurant of Music</h1>
+  <span class="count">48 playlists</span>
+</header>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const API_KEY = 'YOUR_API_KEY_HERE';
+
+const playlists = [
+  { id: "PLs2RfrJzU5ylXpq5mPZ4xUoQk8Jc7CpGV", label: "March", year: 2026, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ylXpq5mPZ4xUoQk8Jc7CpGV" },
+  { id: "PLs2RfrJzU5ylN99Z-9AuSsSjNECPhuN1r", label: "February", year: 2026, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ylN99Z-9AuSsSjNECPhuN1r" },
+  { id: "PLs2RfrJzU5yk-qu1XCnqlgWxH3RUWRwvv", label: "January", year: 2026, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5yk-qu1XCnqlgWxH3RUWRwvv" },
+  { id: "PLs2RfrJzU5ynay9ca86NW7_tC77k7BaCH", label: "December", year: 2025, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ynay9ca86NW7_tC77k7BaCH" },
+  { id: "PLs2RfrJzU5ymOLGTSjpjlsp4Aedv3lpXK", label: "November", year: 2025, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ymOLGTSjpjlsp4Aedv3lpXK" },
+  { id: "PLs2RfrJzU5ynrPkDRH-R9PpEsu6gBEMDC", label: "October", year: 2025, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ynrPkDRH-R9PpEsu6gBEMDC" },
+  { id: "PLs2RfrJzU5yk9rL5IrHSnY_Eh1GCVPynR", label: "September", year: 2025, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5yk9rL5IrHSnY_Eh1GCVPynR" },
+  { id: "PLs2RfrJzU5ymiQ_qhunGL6OSLYNjemCrI", label: "August", year: 2025, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ymiQ_qhunGL6OSLYNjemCrI" },
+  { id: "PLs2RfrJzU5ykFOlsjMQ1KJQsErxIFMoTr", label: "July", year: 2025, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ykFOlsjMQ1KJQsErxIFMoTr" },
+  { id: "PLs2RfrJzU5ymlZNundsx3leDMO8Ja1koU", label: "June", year: 2025, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ymlZNundsx3leDMO8Ja1koU" },
+  { id: "PLs2RfrJzU5ymBGLHLGxl0IZPObORqamPk", label: "May", year: 2025, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ymBGLHLGxl0IZPObORqamPk" },
+  { id: "PLs2RfrJzU5ymTI4S38bUAm7G9ijNNPohQ", label: "April", year: 2025, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ymTI4S38bUAm7G9ijNNPohQ" },
+  { id: "PLs2RfrJzU5yn6oLfL4ZoTVNU_4DoGNAtl", label: "March", year: 2025, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5yn6oLfL4ZoTVNU_4DoGNAtl" },
+  { id: "PLs2RfrJzU5ym1GaZSgyTpMIjaARwM2Tqg", label: "February", year: 2025, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ym1GaZSgyTpMIjaARwM2Tqg" },
+  { id: "PLs2RfrJzU5ykErsJmm5M_VTcBYSuEJO2s", label: "January", year: 2025, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ykErsJmm5M_VTcBYSuEJO2s" },
+  { id: "PLs2RfrJzU5ylFeJmD0hu2mOMlZRocD8dm", label: "December", year: 2024, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ylFeJmD0hu2mOMlZRocD8dm" },
+  { id: "PLs2RfrJzU5ynKIBIxDfuVa7bbulgRCJcL", label: "November", year: 2024, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ynKIBIxDfuVa7bbulgRCJcL" },
+  { id: "PLs2RfrJzU5ymqtLsrYSchxIgYhUc2PY0v", label: "October", year: 2024, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ymqtLsrYSchxIgYhUc2PY0v" },
+  { id: "PLs2RfrJzU5ynEBVobaEqie13vEUBs8Y2j", label: "September", year: 2024, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ynEBVobaEqie13vEUBs8Y2j" },
+  { id: "PLs2RfrJzU5ykAzKpTcNPclEHOpMAQw5Pp", label: "August", year: 2024, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ykAzKpTcNPclEHOpMAQw5Pp" },
+  { id: "PLs2RfrJzU5ymxY8hPqGEdJ6hmhpk6M1oy", label: "July", year: 2024, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ymxY8hPqGEdJ6hmhpk6M1oy" },
+  { id: "PLs2RfrJzU5ynURpw7s3eukvZK3QOsyqMu", label: "June", year: 2024, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ynURpw7s3eukvZK3QOsyqMu" },
+  { id: "PLs2RfrJzU5ymBxUqfQhKxLaVlL2u8LbVB", label: "May", year: 2024, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ymBxUqfQhKxLaVlL2u8LbVB" },
+  { id: "PLs2RfrJzU5yn6UxiJETNIpuKYYw2iBmE9", label: "April", year: 2024, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5yn6UxiJETNIpuKYYw2iBmE9" },
+  { id: "PLs2RfrJzU5ynRBVfG-EvMrd9L-VzI0K_E", label: "March", year: 2024, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ynRBVfG-EvMrd9L-VzI0K_E" },
+  { id: "PLs2RfrJzU5yneqesXey0MsH90S28pDBaB", label: "February", year: 2024, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5yneqesXey0MsH90S28pDBaB" },
+  { id: "PLs2RfrJzU5ym2A7bhxk2pWicJmmfO5Adi", label: "January", year: 2024, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ym2A7bhxk2pWicJmmfO5Adi" },
+  { id: "PLs2RfrJzU5ylnmn1oy_isIvz5NU7SBMMy", label: "2023 — Vol. 7", year: 2023, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ylnmn1oy_isIvz5NU7SBMMy" },
+  { id: "PLs2RfrJzU5ymXtYShKL36pc0xg_WBB0vd", label: "2023 — Vol. 6", year: 2023, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ymXtYShKL36pc0xg_WBB0vd" },
+  { id: "PLs2RfrJzU5ymS4W9QWkrjv-jzf070m7TI", label: "Summer 2023", year: 2023, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ymS4W9QWkrjv-jzf070m7TI" },
+  { id: "PLs2RfrJzU5ylARmg1aWff9xmBKKA7ub_O", label: "2023 — Vol. 5", year: 2023, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ylARmg1aWff9xmBKKA7ub_O" },
+  { id: "PLs2RfrJzU5ymq42ExOmpIQWUXMnYXP6MH", label: "2023 — Vol. 4", year: 2023, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ymq42ExOmpIQWUXMnYXP6MH" },
+  { id: "PLs2RfrJzU5ylSUKrcREwgWWVGEpxfyzaT", label: "2023 — Vol. 3", year: 2023, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ylSUKrcREwgWWVGEpxfyzaT" },
+  { id: "PLs2RfrJzU5ymDJ6h9eUXRan_V3p0cUr-R", label: "2023 — Vol. 2", year: 2023, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ymDJ6h9eUXRan_V3p0cUr-R" },
+  { id: "PLs2RfrJzU5ykOtCxnbHfrtxdVOiGhe1TJ", label: "2023 — Vol. 1.2", year: 2023, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ykOtCxnbHfrtxdVOiGhe1TJ" },
+  { id: "PLs2RfrJzU5ylPl_e69gR_97kwUT22Fb0S", label: "2023 — Vol. 1", year: 2023, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ylPl_e69gR_97kwUT22Fb0S" },
+  { id: "PLs2RfrJzU5yk4sZMUyd15HJrWJxn862Iy", label: "Fall 2022 — Part 3", year: 2022, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5yk4sZMUyd15HJrWJxn862Iy" },
+  { id: "PLs2RfrJzU5ynzYeZ8GTgGPcBeuCdeCCeW", label: "Fall 2022 — Part 2", year: 2022, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ynzYeZ8GTgGPcBeuCdeCCeW" },
+  { id: "PLs2RfrJzU5yn1tb9ee9qp8fyr2o2iyG7s", label: "Fall 2022", year: 2022, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5yn1tb9ee9qp8fyr2o2iyG7s" },
+  { id: "PLs2RfrJzU5ynqnA8hXo89tbdMzh8X_s5N", label: "Summer 2022", year: 2022, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ynqnA8hXo89tbdMzh8X_s5N" },
+  { id: "PLs2RfrJzU5ynm6ezv_eNLl61VgwuPjEIL", label: "Spring 2022", year: 2022, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ynm6ezv_eNLl61VgwuPjEIL" },
+  { id: "PLs2RfrJzU5ylWN6uVay1UGOtBBbxnNEH_", label: "Winter 2022", year: 2022, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ylWN6uVay1UGOtBBbxnNEH_" },
+  { id: "PLs2RfrJzU5ykwkdz2fXDB3pHPdIMleZA7", label: "Fall 2021", year: 2021, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ykwkdz2fXDB3pHPdIMleZA7" },
+  { id: "PLs2RfrJzU5ykU10nhyadQPPBBJKOCAfNV", label: "Summer 2021", year: 2021, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ykU10nhyadQPPBBJKOCAfNV" },
+  { id: "PLs2RfrJzU5yl_rh3RV4hi8mbZ49VfK2aH", label: "Spring 2021", year: 2021, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5yl_rh3RV4hi8mbZ49VfK2aH" },
+  { id: "PLs2RfrJzU5yn9ED2XRHHrv1KxHrPluzA1", label: "Winter 2021", year: 2021, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5yn9ED2XRHHrv1KxHrPluzA1" },
+  { id: "PLs2RfrJzU5ynjWAmNJ9rtvTGjS8sRdEj8", label: "Fall 2020", year: 2020, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ynjWAmNJ9rtvTGjS8sRdEj8" },
+  { id: "PLs2RfrJzU5ylmve5ReyIzMdJi8I8fVd96", label: "Winter 2020", year: 2020, url: "https://www.youtube.com/playlist?list=PLs2RfrJzU5ylmve5ReyIzMdJi8I8fVd96" }
+];
+
+// Group by year for year markers
+const grid = document.getElementById('grid');
+let currentYear = null;
+
+playlists.forEach((p, i) => {
+  // Insert year marker when year changes
+  if (p.year !== currentYear) {
+    currentYear = p.year;
+    const marker = document.createElement('div');
+    marker.className = 'year-marker';
+    marker.textContent = p.year;
+    grid.appendChild(marker);
+  }
+
+  const card = document.createElement('a');
+  card.className = 'card';
+  card.href = p.url;
+  card.target = '_blank';
+  card.rel = 'noopener noreferrer';
+  card.dataset.listId = p.id;
+  card.dataset.index = i;
+  card.innerHTML = `
+    <div class="thumb-wrap">
+      <div class="thumb-placeholder"></div>
+      <img src="" alt="${p.label} ${p.year}">
+    </div>
+    <div class="meta">
+      <div class="year-tag">${p.year}</div>
+      <div class="title">${p.label}</div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+// ── Lazy loader ──────────────────────────────────────────────
+// Batches of 50 (YouTube API max). Fetches a batch when any
+// card in that batch enters the viewport.
+
+const BATCH_SIZE = 50;
+const batches = [];
+for (let i = 0; i < playlists.length; i += BATCH_SIZE) {
+  batches.push(playlists.slice(i, i + BATCH_SIZE));
+}
+
+const fetchedBatches = new Set();
+
+function fetchBatch(batchIndex) {
+  if (fetchedBatches.has(batchIndex)) return;
+  fetchedBatches.add(batchIndex);
+
+  const batch = batches[batchIndex];
+  const ids = batch.map(p => p.id).join(',');
+  const url = `https://www.googleapis.com/youtube/v3/playlists?part=snippet&id=${ids}&maxResults=50&key=${API_KEY}`;
+
+  fetch(url)
+    .then(r => r.json())
+    .then(data => {
+      if (!data.items) return;
+
+      const thumbMap = {};
+      data.items.forEach(item => {
+        const t = item.snippet.thumbnails;
+        const src = (t.maxres || t.standard || t.high || t.medium || t.default || {}).url;
+        if (src) thumbMap[item.id] = src;
+      });
+
+      // Inject into cards for this batch
+      const start = batchIndex * BATCH_SIZE;
+      const end = start + batch.length;
+      const cards = [...document.querySelectorAll('.card')];
+      cards.slice(start, end).forEach(card => {
+        const src = thumbMap[card.dataset.listId];
+        const ph = card.querySelector('.thumb-placeholder');
+        ph.classList.add('done');
+        if (!src) return;
+        const img = card.querySelector('img');
+        img.onload = () => img.classList.add('loaded');
+        img.src = src;
+      });
+    })
+    .catch(err => console.error('API error:', err));
+}
+
+// IntersectionObserver — reveals cards and triggers batch fetch
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const card = entry.target;
+    card.classList.add('visible');
+
+    const index = parseInt(card.dataset.index);
+    const batchIndex = Math.floor(index / BATCH_SIZE);
+    fetchBatch(batchIndex);
+
+    observer.unobserve(card);
+  });
+}, {
+  rootMargin: '200px 0px', // start loading 200px before entering view
+  threshold: 0
+});
+
+document.querySelectorAll('.card').forEach(card => observer.observe(card));
+
+// Always fetch the first batch immediately
+fetchBatch(0);
+</script>
+
+</body>
+</html>
